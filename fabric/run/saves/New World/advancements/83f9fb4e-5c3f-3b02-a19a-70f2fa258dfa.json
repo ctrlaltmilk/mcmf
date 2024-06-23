@@ -1,0 +1,22 @@
+{
+  "minecraft:recipes/misc/gold_ingot_from_blasting_gold_ore": {
+    "criteria": {
+      "has_gold_ore": "2024-06-08 03:14:42 -0400"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/gold_ingot_from_smelting_gold_ore": {
+    "criteria": {
+      "has_gold_ore": "2024-06-08 03:14:42 -0400"
+    },
+    "done": true
+  },
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "minecraft:sparse_jungle": "2024-06-08 03:14:42 -0400",
+      "minecraft:stony_shore": "2024-06-09 03:17:37 -0400"
+    },
+    "done": false
+  },
+  "DataVersion": 2975
+}
