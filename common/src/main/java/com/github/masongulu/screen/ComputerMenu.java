@@ -61,7 +61,11 @@ public class ComputerMenu extends AbstractContainerMenu {
 
     @Override
     public boolean clickMenuButton(Player player, int i) {
-        blockEntity.togglePower();
+        if (i == 0) {
+            blockEntity.togglePower();
+        } else if (i == 1) {
+            blockEntity.pause();
+        }
         return true;
     }
 

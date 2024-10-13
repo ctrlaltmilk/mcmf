@@ -1,8 +1,9 @@
 package com.github.masongulu.block.entity;
 
-import com.github.masongulu.uxn.UXNDeviceManager;
+import com.github.masongulu.uxn.UXNBus;
+import com.github.masongulu.uxn.UXNEvent;
 import com.github.masongulu.uxn.devices.IDevice;
-import com.github.masongulu.uxn.devices.IUXNDeviceProvider;
+import com.github.masongulu.uxn.devices.IDeviceProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
@@ -12,14 +13,15 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.github.masongulu.block.entity.ModBlockEntities.COMPUTER_BLOCK_ENTITY;
 import static com.github.masongulu.block.entity.ModBlockEntities.REDSTONE_DEVICE_BLOCK_ENTITY;
 
-public class RedstoneDeviceBlockEntity extends BlockEntity implements IUXNDeviceProvider, IDevice {
-    private UXNDeviceManager uxnDeviceManager;
+public class RedstoneDeviceBlockEntity extends BlockEntity implements IDevice, IDeviceProvider {
+    private UXNBus bus;
     private int deviceNumber = 9;
     public final Map<Direction,Integer> redstoneOutputs = new HashMap<>();
     public Map<Direction,Integer> redstoneInputs = new HashMap<>();
+
+    boolean redstoneUpdated = false;
 
     public RedstoneDeviceBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(REDSTONE_DEVICE_BLOCK_ENTITY.get(), blockPos, blockState);
@@ -29,6 +31,10 @@ public class RedstoneDeviceBlockEntity extends BlockEntity implements IUXNDevice
     }
 
     private void tick(Level level, BlockPos pos, BlockState state) {
+        if (redstoneUpdated) {
+            redstoneUpdated = false;
+            level.updateNeighborsAt(pos, state.getBlock());
+        }
     }
 
     public static <T extends BlockEntity> void tick(Level level, BlockPos blockPos, BlockState blockState, T t) {
@@ -36,23 +42,21 @@ public class RedstoneDeviceBlockEntity extends BlockEntity implements IUXNDevice
     }
 
     public void updateRedstone(Map<Direction,Integer> redstone) {
-        if (uxnDeviceManager == null) return;
-        System.out.println("Updating redstone");
+        if (bus == null) return;
         redstoneInputs = redstone;
-        uxnDeviceManager.uxn.queueVector((uxnDeviceManager.readDev(deviceNumber << 4) << 8)
-                | uxnDeviceManager.readDev(deviceNumber << 4 + 1));
+        bus.uxn.queueEvent(new RedstoneEvent(deviceNumber));
     }
 
     @Override
-    public void attach(UXNDeviceManager manager) {
-        uxnDeviceManager = manager;
+    public void attach(UXNBus manager) {
+        bus = manager;
         manager.setDevice(deviceNumber, this);
-        System.out.println("Redstone device attached!");
     }
 
     @Override
-    public void detach(UXNDeviceManager manager) {
-        uxnDeviceManager = null;
+    public void detach(UXNBus bus) {
+        bus.deleteDevice(deviceNumber);
+        this.bus = null;
     }
 
     @Override
@@ -60,22 +64,28 @@ public class RedstoneDeviceBlockEntity extends BlockEntity implements IUXNDevice
         int port = address & 0x0F;
         switch(port) {
             case 2: // Perform rotation on the Block side, NORTH is FRONT
-                redstoneOutputs.put(Direction.NORTH, (int)uxnDeviceManager.readDev(address));
+                redstoneUpdated = true;
+                redstoneOutputs.put(Direction.NORTH, (int) bus.readDev(address));
                 break;
             case 3: // RIGHT
-                redstoneOutputs.put(Direction.EAST, (int)uxnDeviceManager.readDev(address));
+                redstoneUpdated = true;
+                redstoneOutputs.put(Direction.EAST, (int) bus.readDev(address));
                 break;
             case 4: // LEFT
-                redstoneOutputs.put(Direction.WEST, (int)uxnDeviceManager.readDev(address));
+                redstoneUpdated = true;
+                redstoneOutputs.put(Direction.WEST, (int) bus.readDev(address));
                 break;
             case 5: // BACK
-                redstoneOutputs.put(Direction.SOUTH, (int)uxnDeviceManager.readDev(address));
+                redstoneUpdated = true;
+                redstoneOutputs.put(Direction.SOUTH, (int) bus.readDev(address));
                 break;
             case 6: // UP
-                redstoneOutputs.put(Direction.UP, (int)uxnDeviceManager.readDev(address));
+                redstoneUpdated = true;
+                redstoneOutputs.put(Direction.UP, (int) bus.readDev(address));
                 break;
             case 7: // DOWN
-                redstoneOutputs.put(Direction.DOWN, (int)uxnDeviceManager.readDev(address));
+                redstoneUpdated = true;
+                redstoneOutputs.put(Direction.DOWN, (int) bus.readDev(address));
                 break;
         }
     }
@@ -85,24 +95,41 @@ public class RedstoneDeviceBlockEntity extends BlockEntity implements IUXNDevice
         int port = address & 0x0F;
         switch(port) {
             case 2: // Perform rotation on the Block side, NORTH is FRONT
-                uxnDeviceManager.writeDev(address, (byte)(redstoneInputs.get(Direction.NORTH) & 0xFF));
+                bus.writeDev(address, (byte)(redstoneInputs.get(Direction.NORTH) & 0xFF));
                 break;
             case 3: // RIGHT
-                uxnDeviceManager.writeDev(address, (byte)(redstoneInputs.get(Direction.EAST) & 0xFF));
+                bus.writeDev(address, (byte)(redstoneInputs.get(Direction.EAST) & 0xFF));
                 break;
             case 4: // LEFT
-                uxnDeviceManager.writeDev(address, (byte)(redstoneInputs.get(Direction.WEST) & 0xFF));
+                bus.writeDev(address, (byte)(redstoneInputs.get(Direction.WEST) & 0xFF));
                 break;
             case 5: // BACK
-                uxnDeviceManager.writeDev(address, (byte)(redstoneInputs.get(Direction.SOUTH) & 0xFF));
+                bus.writeDev(address, (byte)(redstoneInputs.get(Direction.SOUTH) & 0xFF));
                 break;
             case 6: // UP
-                uxnDeviceManager.writeDev(address, (byte)(redstoneInputs.get(Direction.UP) & 0xFF));
+                bus.writeDev(address, (byte)(redstoneInputs.get(Direction.UP) & 0xFF));
                 break;
             case 7: // DOWN
-                uxnDeviceManager.writeDev(address, (byte)(redstoneInputs.get(Direction.DOWN) & 0xFF));
+                bus.writeDev(address, (byte)(redstoneInputs.get(Direction.DOWN) & 0xFF));
                 break;
         }
+    }
 
+    @Override
+    public IDevice getDevice(Direction attachSide) {
+        return this;
+    }
+}
+
+class RedstoneEvent implements UXNEvent {
+    int deviceNumber;
+    RedstoneEvent(int deviceNumber) {
+        this.deviceNumber = deviceNumber;
+    }
+    @Override
+    public void handle(UXNBus bus) {
+        int vectorAddress = deviceNumber << 4;
+        int vector = (bus.readDev(vectorAddress) << 8) | bus.readDev(vectorAddress + 1);
+        bus.uxn.pc = vector;
     }
 }

@@ -1,6 +1,5 @@
 package com.github.masongulu.block;
 
-import com.github.masongulu.block.entity.CableBlockEntity;
 import com.github.masongulu.block.entity.ModBlockEntities;
 import com.github.masongulu.block.entity.RedstoneDeviceBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -72,7 +71,8 @@ public class RedstoneDeviceBlock extends BaseEntityBlock {
                 Map<Direction, Integer> newRedstone = new HashMap<>();
                 boolean different = false;
                 for (Direction direction : Direction.values()) {
-                    int rsLevel = level.getDirectSignal(blockPos, adjustForRotation(facing, direction));
+                    Direction adjusted = adjustForRotation(facing, direction);
+                    int rsLevel = level.getDirectSignal(blockPos.relative(adjusted), adjusted.getOpposite());
                     newRedstone.put(direction, rsLevel);
                     if (rsLevel != lastRedstone.getOrDefault(direction, 0)) {
                         different = true;
@@ -87,14 +87,14 @@ public class RedstoneDeviceBlock extends BaseEntityBlock {
     }
 
     private Direction adjustForRotation(Direction facing, Direction direction) {
-        if (direction != Direction.UP && direction != Direction.DOWN && facing != Direction.NORTH) {
+        if (direction != Direction.UP && direction != Direction.DOWN && facing != Direction.SOUTH) {
             // There surely is a better way of doing this.
             if (facing == Direction.EAST) {
-                return direction.getCounterClockWise();
-            } else if (facing == Direction.SOUTH) {
+                return direction.getClockWise();
+            } else if (facing == Direction.NORTH) {
                 return direction.getOpposite();
             } else if (facing == Direction.WEST) {
-                return direction.getClockWise();
+                return direction.getCounterClockWise();
             }
         }
         return direction;
@@ -103,10 +103,10 @@ public class RedstoneDeviceBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
-        if (blockEntityType == ModBlockEntities.REDSTONE_DEVICE_BLOCK_ENTITY) {
-            return RedstoneDeviceBlockEntity::tick;
+        if (level.isClientSide()) {
+            return null;
         }
-        return null;
+        return createTickerHelper(blockEntityType, ModBlockEntities.REDSTONE_DEVICE_BLOCK_ENTITY.get(), RedstoneDeviceBlockEntity::tick);
     }
 
     @Override
@@ -114,7 +114,7 @@ public class RedstoneDeviceBlock extends BaseEntityBlock {
         BlockEntity blockEntity = blockGetter.getBlockEntity(blockPos);
         if (blockEntity instanceof RedstoneDeviceBlockEntity r) {
             Direction facing = blockState.getValue(FACING);
-            Direction adjusted = adjustForRotation(direction, facing);
+            Direction adjusted = adjustForRotation(facing, direction);
 
             return r.redstoneOutputs.get(adjusted);
         }
@@ -124,6 +124,11 @@ public class RedstoneDeviceBlock extends BaseEntityBlock {
     @Override
     public int getDirectSignal(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Direction direction) {
         return getSignal(blockState, blockGetter, blockPos, direction);
+    }
+
+    @Override
+    public boolean isSignalSource(BlockState blockState) {
+        return true;
     }
 
 

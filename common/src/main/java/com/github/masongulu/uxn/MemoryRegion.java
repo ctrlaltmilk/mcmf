@@ -1,4 +1,4 @@
-package com.github.masongulu.uxn;
+package uxn;
 
 public class MemoryRegion {
     private static final int MEMORY_SIZE = 0xFFFF + 1; // 64 KB

@@ -6,6 +6,10 @@ import java.util.List;
 public class UXNExecutor extends Thread {
     private final List<UXN> UXNs = new ArrayList<>();
 
+    public int count() {
+        return UXNs.size();
+    }
+
     public void addUXN(UXN uxn) {
         UXNs.add(uxn);
     }
@@ -16,15 +20,14 @@ public class UXNExecutor extends Thread {
 
     public void tick() {
         for (UXN uxn : UXNs) {
-            uxn.runLimited(1);
+            uxn.runLimited(100);
         }
     }
 
-    public int count() {
-        return UXNs.size();
-    }
-
+    @Override
     public void run() {
-        while (true) tick();
+        do {
+            tick();
+        } while (!UXNs.isEmpty());
     }
 }

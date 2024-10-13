@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "mcmf:block/cable"
+    }
+  }
+}

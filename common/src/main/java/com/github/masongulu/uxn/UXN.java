@@ -3,36 +3,40 @@ package com.github.masongulu.uxn;
 // Adapted directly from https://git.sr.ht/~rabbits/uxn11
 
 import com.github.masongulu.uxn.devices.Device;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class UXN {
-    public final MemoryRegion memory = new MemoryRegion();
+    public final uxn.MemoryRegion memory = new uxn.MemoryRegion();
     public final Stack rst = new Stack("RST"); // return stack
     public final Stack wst = new Stack("WST"); // working stack
     public int pc;
     private Stack s;
     private int ins;
     public int cycles = 0;
+    private final UXNBus bus;
+    private final Device[] devices = new Device[16];
     private boolean running = false;
-    private final Queue<Integer> vectorQueue = new LinkedList<>();
-    private UXNDeviceManager deviceManager;
+    public boolean paused = false;
+    private final Queue<UXNEvent> eventQueue = new LinkedList<>();
 
+    public boolean _enable_debug = false;
 
     public String toString() {
         return wst + "\n" + rst;
     }
 
-    public UXN(UXNDeviceManager manager) {
-        deviceManager = manager;
-        deviceManager.setUxn(this);
+    public UXN(@NotNull UXNBus bus) {
+        this.bus = bus;
+        bus.setUxn(this);
+        new SystemDevice().attach(bus);
     }
 
-    public void queueVector(int address) {
-        vectorQueue.add(address);
+    public void queueEvent(UXNEvent event) {
+        eventQueue.add(event);
     }
-
 
     private void set(int x, int y, int x2, int y2) {
         if ((ins & 0x20) > 0) {
@@ -66,6 +70,9 @@ public class UXN {
         pc = pc % 0xFFFF;
         s = (ins & 0x40) > 0 ? rst : wst;
         boolean mode2 = (ins & 0x20) > 0;
+        if (_enable_debug) {
+            System.err.printf("%04x %s\n", pc, DISASM[ins]);
+        }
         switch(ins & 0x3f) {
         case 0x00: case 0x20:
             switch(ins) {
@@ -270,10 +277,10 @@ public class UXN {
             t = s.getT(false);
             set(1, 0, 1, 1);
             if (mode2) {
-                s.setN(false, deviceManager.dei(t));
-                s.setT(false, deviceManager.dei((t + 1) % 256));
+                s.setN(false, bus.dei(t));
+                s.setT(false, bus.dei((t + 1) % 256));
             } else {
-                s.setT(false, deviceManager.dei(t));
+                s.setT(false, bus.dei(t));
             }
             break;
         case 0x17: case 0x37: // DEO
@@ -282,10 +289,10 @@ public class UXN {
             l = s.getL(false);
             set(2, -2, 3, -3);
             if (mode2) {
-                deviceManager.deo(t, (byte) l);
-                deviceManager.deo((t + 1) % 256, (byte) n);
+                bus.deo(t, (byte) l);
+                bus.deo((t + 1) % 256, (byte) n);
             } else {
-                deviceManager.deo(t, (byte) n);
+                bus.deo(t, (byte) n);
             }
             break;
         case 0x18: case 0x38: // ADD
@@ -353,19 +360,29 @@ public class UXN {
     }
 
     public void runLimited(int limit) {
+        if (paused) {
+            return;
+        }
         for (int i = 0; i < limit; i++) {
             if (!running) {
                 // check for vector in the queue
-                if (vectorQueue.isEmpty()) return;
-                pc = vectorQueue.remove();
+                if (eventQueue.isEmpty()) return;
+                eventQueue.poll().handle(bus);
                 running = true;
             }
             step();
         }
     }
+
+    public boolean isRunning() {return running;}
+
+    public static final String[] DISASM = new String[]{"BRK","INC", "POP","NIP", "SWP","ROT", "DUP","OVR", "EQU","NEQ", "GTH","LTH","JMP","JCN","JSR","STH", "LDZ","STZ", "LDR","STR", "LDA","STA", "DEI","DEO", "ADD","SUB", "MUL","DIV", "AND","ORA", "EOR","SFT", "JCI","INC2", "POP2","NIP2", "SWP2","ROT2", "DUP2","OVR2", "EQU2","NEQ2", "GTH2","LTH2", "JMP2","JCN2", "JSR2","STH2", "LDZ2","STZ2", "LDR2","STR2", "LDA2","STA2", "DEI2","DEO2", "ADD2","SUB2", "MUL2","DIV2", "AND2","ORA2", "EOR2","SFT2", "JMI","INCr", "POPr","NIPr", "SWPr","ROTr", "DUPr","OVRr", "EQUr","NEQr", "GTHr","LTHr", "JMPr","JCNr", "JSRr","STHr", "LDZr","STZr", "LDRr","STRr", "LDAr","STAr", "DEIr","DEOr", "ADDr","SUBr", "MULr","DIVr", "ANDr","ORAr", "EORr","SFTr", "JSI","INC2r", "POP2r","NIP2r", "SWP2r","ROT2r", "DUP2r","OVR2r", "EQU2r","NEQ2r", "GTH2r","LTH2r", "JMP2r","JCN2r", "JSR2r","STH2r", "LDZ2r","STZ2r", "LDR2r","STR2r", "LDA2r","STA2r", "DEI2r","DEO2r", "ADD2r","SUB2r", "MUL2r","DIV2r", "AND2r","ORA2r", "EOR2r","SFT2r", "LIT","INCk", "POPk","NIPk", "SWPk","ROTk", "DUPk","OVRk", "EQUk","NEQk", "GTHk","LTHk", "JMPk","JCNk", "JSRk","STHk", "LDZk","STZk", "LDRk","STRk", "LDAk","STAk", "DEIk","DEOk", "ADDk","SUBk", "MULk","DIVk", "ANDk","ORAk", "EORk","SFTk","LIT2", "INC2k","POP2k", "NIP2k","SWP2k", "ROT2k","DUP2k", "OVR2k","EQU2k", "NEQ2k","GTH2k", "LTH2k","JMP2k", "JCN2k","JSR2k", "STH2k","LDZ2k", "STZ2k","LDR2k", "STR2k","LDA2k", "STA2k","DEI2k", "DEO2k","ADD2k", "SUB2k","MUL2k", "DIV2k","AND2k", "ORA2k","EOR2k", "SFT2k","LITr", "INCkr","POPkr", "NIPkr","SWPkr", "ROTkr","DUPkr", "OVRkr","EQUkr", "NEQkr","GTHkr", "LTHkr","JMPkr", "JCNkr","JSRkr", "STHkr","LDZkr", "STZkr","LDRkr", "STRkr","LDAkr", "STAkr","DEIkr", "DEOkr","ADDkr", "SUBkr","MULkr", "DIVkr","ANDkr", "ORAkr","EORkr", "SFTkr","LIT2r", "INC2kr","POP2kr", "NIP2kr","SWP2kr", "ROT2kr","DUP2kr", "OVR2kr","EQU2kr", "NEQ2kr","GTH2kr", "LTH2kr","JMP2kr", "JCN2kr","JSR2kr", "STH2kr","LDZ2kr", "STZ2kr","LDR2kr", "STR2kr","LDA2kr", "STA2kr","DEI2kr", "DEO2kr","ADD2kr", "SUB2kr","MUL2kr", "DIV2kr","AND2kr", "ORA2kr","EOR2kr", "SFT2kr"};
 }
 
 class SystemDevice extends Device {
+    public SystemDevice() {
+        deviceId = 0;
+    }
     @Override
     public void write(int address) {
         int port = address & 0x0F;
@@ -375,19 +392,19 @@ class SystemDevice extends Device {
         case 0x02: case 0x03: // expansion*
             break;
         case 0x04:
-            uxn.wst.setPtr(deviceManager.readDev(address)); break;
+            bus.uxn.wst.setPtr(bus.readDev(address)); break;
         case 0x05:
-            uxn.rst.setPtr(deviceManager.readDev(address)); break;
+            bus.uxn.rst.setPtr(bus.readDev(address)); break;
         case 0x08: case 0x09: // red*
         case 0x0a: case 0x0b: // green*
         case 0x0c: case 0x0d: // blue*
             // TODO
             break;
         case 0x0e: // debug
-            int data = deviceManager.readDev(address);
+            int data = bus.readDev(address);
             if (data == 0x01) {
-                System.out.println(uxn.wst);
-                System.out.println(uxn.rst);
+                System.out.println(bus.uxn.wst);
+                System.out.println(bus.uxn.rst);
             }
             break;
         case 0x0f: // state
@@ -404,9 +421,9 @@ class SystemDevice extends Device {
         case 0x02: case 0x03: // expansion*
             break;
         case 0x04:
-            deviceManager.writeDev(address, (byte)uxn.wst.getPtr()); break;
+            bus.writeDev(address, (byte)bus.uxn.wst.getPtr()); break;
         case 0x05:
-            deviceManager.writeDev(address, (byte)uxn.rst.getPtr()); break;
+            bus.writeDev(address, (byte)bus.uxn.rst.getPtr()); break;
         case 0x08: case 0x09: // red*
         case 0x0a: case 0x0b: // green*
         case 0x0c: case 0x0d: // blue*

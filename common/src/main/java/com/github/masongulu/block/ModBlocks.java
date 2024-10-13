@@ -3,6 +3,9 @@ package com.github.masongulu.block;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -19,7 +22,14 @@ public class ModBlocks {
     public static RegistrySupplier<Item> CABLE_ITEM;
     public static RegistrySupplier<Item> REDSTONE_DEVICE_ITEM;
 
+    public static TagKey<Block> DEVICE_CABLE;
+
+    private static TagKey<Block> tag(String name) {
+        return TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(MOD_ID, name));
+    }
+
     public static void register() {
+        DEVICE_CABLE = tag("device_cable");
         COMPUTER_BLOCK = BLOCKS.register("computer", ComputerBlock::new);
         COMPUTER_ITEM = BLOCK_ITEMS.register("computer", () -> new BlockItem(COMPUTER_BLOCK.get(), new Item.Properties()));
         CABLE_BLOCK = BLOCKS.register("cable", CableBlock::new);
