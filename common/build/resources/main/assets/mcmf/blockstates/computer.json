@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "mcmf:block/computer",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "mcmf:block/computer"
+    },
+    "facing=south": {
+      "model": "mcmf:block/computer",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "mcmf:block/computer",
+      "y": 270
+    }
+  }
+}
