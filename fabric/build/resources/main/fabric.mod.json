@@ -20,6 +20,9 @@
     ],
     "client": [
       "com.github.masongulu.fabric.client.ComputerModFabricClient"
+    ],
+    "fabric-datagen": [
+      "com.github.masongulu.fabric.datagen.DataGenerator"
     ]
   },
   "mixins": [

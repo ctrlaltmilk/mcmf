@@ -2,10 +2,12 @@ package com.github.masongulu.uxn;
 
 import com.github.masongulu.ComputerMod;
 import com.github.masongulu.block.entity.ComputerBlockEntity;
+import com.github.masongulu.item.memory.MemoryItem;
 import com.github.masongulu.uxn.devices.IDevice;
 import com.github.masongulu.uxn.devices.IDeviceProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -22,6 +24,7 @@ public class UXNBus {
     private final Set<IDevice> deviceSet = new HashSet<>();
     private boolean executing = false;
     private boolean conflicting = false;
+    private boolean paused = false;
 
     private final ComputerBlockEntity computerEntity;
     private final byte[] deviceMemory = new byte[256];
@@ -129,23 +132,26 @@ public class UXNBus {
     }
 
     public void startup() {
-        if (uxn != null) {
-            uxn.paused = false;
-        }
         if (executing || conflicting) {
             return;
         }
-        refresh(this.computerEntity.getLevel(), this.computerEntity.getBlockPos());
-        executing = true;
-        new UXN(this);
-        // TODO insert boot code
-        ComputerMod.test(this);
-        uxn.queueEvent(new BootEvent());
-        ComputerMod.UXN_EXECUTOR.addUXN(uxn);
+        ItemStack stack = this.computerEntity.getItem(0);
+        if (stack.getItem() instanceof MemoryItem item) {
+            MemoryRegion memory = item.getMemory(stack);
+            refresh(this.computerEntity.getLevel(), this.computerEntity.getBlockPos());
+            executing = true;
+            new UXN(this, memory);
+            uxn.paused = paused;
+            uxn.queueEvent(new BootEvent());
+            ComputerMod.UXN_EXECUTOR.addUXN(uxn);
+        }
     }
 
     public void pause(boolean state) {
-        uxn.paused = state;
+        this.paused = state;
+        if (uxn != null) {
+            uxn.paused = state;
+        }
     }
     public void pause() {
         pause(true);
@@ -204,6 +210,20 @@ public class UXNBus {
 
     public boolean isExecuting() {
         return executing;
+    }
+
+    public boolean isPaused() {
+        if (uxn == null) {
+            return paused;
+        }
+        return uxn.paused;
+    }
+
+    public int getEventCount() {
+        if (uxn == null) {
+            return 0;
+        }
+        return uxn.getEventCount();
     }
 }
 

@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class UXN {
-    public final uxn.MemoryRegion memory = new uxn.MemoryRegion();
+    public MemoryRegion memory = new MemoryRegion();
     public final Stack rst = new Stack("RST"); // return stack
     public final Stack wst = new Stack("WST"); // working stack
     public int pc;
@@ -20,12 +20,18 @@ public class UXN {
     private final Device[] devices = new Device[16];
     private boolean running = false;
     public boolean paused = false;
+    public boolean doStep = false;
     private final Queue<UXNEvent> eventQueue = new LinkedList<>();
 
     public boolean _enable_debug = false;
 
     public String toString() {
         return wst + "\n" + rst;
+    }
+
+    public UXN(@NotNull UXNBus bus, MemoryRegion memory) {
+        this(bus);
+        this.memory = memory;
     }
 
     public UXN(@NotNull UXNBus bus) {
@@ -56,6 +62,10 @@ public class UXN {
             return;
         }
         s = rst;
+    }
+
+    public int getEventCount() {
+        return eventQueue.size();
     }
 
     // execute 1 instruction
@@ -360,7 +370,7 @@ public class UXN {
     }
 
     public void runLimited(int limit) {
-        if (paused) {
+        if (paused && !doStep) {
             return;
         }
         for (int i = 0; i < limit; i++) {
@@ -371,6 +381,10 @@ public class UXN {
                 running = true;
             }
             step();
+            if (paused) {
+                doStep = false;
+                break;
+            }
         }
     }
 

@@ -1,4 +1,4 @@
-package uxn;
+package com.github.masongulu.uxn;
 
 public class MemoryRegion {
     private static final int MEMORY_SIZE = 0xFFFF + 1; // 64 KB
@@ -18,8 +18,8 @@ public class MemoryRegion {
 
     public void writeShort(int address, short d) {
         address = checkAddress(address);
-        data[address] = (byte)((d >>> 8) & 0xFF);
-        data[(address + 1) % MEMORY_SIZE] = (byte)(d & 0xFF);
+        writeByte(address, (byte)((d >>> 8) & 0xFF));
+        writeByte((address + 1) % MEMORY_SIZE, (byte)(d & 0xFF));
     }
 
     public void write(boolean isShort, int address, int d) {

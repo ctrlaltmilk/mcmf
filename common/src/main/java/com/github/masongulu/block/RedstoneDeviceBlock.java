@@ -109,6 +109,7 @@ public class RedstoneDeviceBlock extends BaseEntityBlock {
         return createTickerHelper(blockEntityType, ModBlockEntities.REDSTONE_DEVICE_BLOCK_ENTITY.get(), RedstoneDeviceBlockEntity::tick);
     }
 
+
     @Override
     public int getSignal(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Direction direction) {
         BlockEntity blockEntity = blockGetter.getBlockEntity(blockPos);

@@ -43,6 +43,7 @@ public class RedstoneDeviceBlockEntity extends BlockEntity implements IDevice, I
 
     public void updateRedstone(Map<Direction,Integer> redstone) {
         if (bus == null) return;
+        if (bus.uxn == null) return;
         redstoneInputs = redstone;
         bus.uxn.queueEvent(new RedstoneEvent(deviceNumber));
     }
