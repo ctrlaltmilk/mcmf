@@ -22,29 +22,10 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RedstoneDeviceBlock extends BaseEntityBlock {
-    public static final DirectionProperty FACING;
+public class RedstoneDeviceBlock extends GenericDeviceBlock {
 
     public RedstoneDeviceBlock() {
         super(Properties.of(Material.STONE));
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
-
-    }
-
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
-    }
-
-    public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
-        return this.defaultBlockState().setValue(FACING, blockPlaceContext.getHorizontalDirection().getOpposite());
-    }
-
-    public BlockState rotate(BlockState blockState, Rotation rotation) {
-        return blockState.setValue(FACING, rotation.rotate(blockState.getValue(FACING)));
-    }
-
-    public BlockState mirror(BlockState blockState, Mirror mirror) {
-        return blockState.rotate(mirror.getRotation(blockState.getValue(FACING)));
     }
 
     public BlockEntity newBlockEntity(BlockPos arg, BlockState arg2) {
@@ -130,10 +111,5 @@ public class RedstoneDeviceBlock extends BaseEntityBlock {
     @Override
     public boolean isSignalSource(BlockState blockState) {
         return true;
-    }
-
-
-    static {
-        FACING = HorizontalDirectionalBlock.FACING;
     }
 }

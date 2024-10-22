@@ -208,6 +208,12 @@ public class UXNBus {
 //        deviceEntities.clear();
     }
 
+    public void queueEvent(UXNEvent event) {
+        if (uxn != null) {
+            uxn.queueEvent(event);
+        }
+    }
+
     public boolean isExecuting() {
         return executing;
     }

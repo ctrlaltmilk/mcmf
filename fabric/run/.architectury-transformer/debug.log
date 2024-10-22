@@ -97,26 +97,27 @@
 [Architectury Transformer DEBUG]  - /home/mason/Documents/Code/Minecraft Mainframes/.gradle/loom-cache/remapped_mods/loom_mappings_1_18_2_layered_hash_40545_v2/net/fabricmc/fabric-api/fabric-resource-conditions-api-v1/2.0.3+91b7aa6660/fabric-resource-conditions-api-v1-2.0.3+91b7aa6660.jar
 [Architectury Transformer DEBUG]  - /home/mason/Documents/Code/Minecraft Mainframes/.gradle/loom-cache/remapped_mods/loom_mappings_1_18_2_layered_hash_40545_v2/net/fabricmc/fabric-api/fabric-resource-loader-v0/0.5.3+047a5ecb60/fabric-resource-loader-v0-0.5.3+047a5ecb60.jar
 [Architectury Transformer DEBUG]  - /home/mason/Documents/Code/Minecraft Mainframes/.gradle/loom-cache/remapped_mods/loom_mappings_1_18_2_layered_hash_40545_v2/net/fabricmc/fabric-api/fabric-transitive-access-wideners-v1/1.1.0+e747827960/fabric-transitive-access-wideners-v1-1.1.0+e747827960.jar
-[Architectury Transformer] Read classpath in 1.315 s
+[Architectury Transformer] Read classpath in 1.261 s
 [Architectury Transformer DEBUG] Closed File Systems for /home/mason/Documents/Code/Minecraft Mainframes/common/build/devlibs/mcmf-common-1.0.0-dev.jar
-[Architectury Transformer DEBUG] Transforming 5 transformer(s) from /home/mason/Documents/Code/Minecraft Mainframes/common/build/devlibs/mcmf-common-1.0.0-dev.jar to /tmp/16073039490128529234.jar: 
-[Architectury Transformer DEBUG]  - dev.architectury.transformer.transformers.RuntimeMixinRefmapDetector@6121c9d6
-[Architectury Transformer DEBUG]  - dev.architectury.transformer.transformers.GenerateFakeFabricMod@87f383f
-[Architectury Transformer DEBUG]  - dev.architectury.transformer.transformers.TransformExpectPlatform@4eb7f003
-[Architectury Transformer DEBUG]  - dev.architectury.transformer.transformers.RemapInjectables@eafc191
-[Architectury Transformer DEBUG]  - dev.architectury.transformer.transformers.TransformPlatformOnly@612fc6eb
-[Architectury Transformer DEBUG] Transforming from /home/mason/Documents/Code/Minecraft Mainframes/common/build/devlibs/mcmf-common-1.0.0-dev.jar to /tmp/16073039490128529234.jar with 5 transformer(s) on dev.architectury.transformer.handler.SimpleTransformerHandler
+[Architectury Transformer DEBUG] Transforming 5 transformer(s) from /home/mason/Documents/Code/Minecraft Mainframes/common/build/devlibs/mcmf-common-1.0.0-dev.jar to /tmp/13963990380159220358.jar: 
+[Architectury Transformer DEBUG]  - dev.architectury.transformer.transformers.RuntimeMixinRefmapDetector@3578436e
+[Architectury Transformer DEBUG]  - dev.architectury.transformer.transformers.GenerateFakeFabricMod@706a04ae
+[Architectury Transformer DEBUG]  - dev.architectury.transformer.transformers.TransformExpectPlatform@6eceb130
+[Architectury Transformer DEBUG]  - dev.architectury.transformer.transformers.RemapInjectables@10a035a0
+[Architectury Transformer DEBUG]  - dev.architectury.transformer.transformers.TransformPlatformOnly@67b467e9
+[Architectury Transformer DEBUG] Transforming from /home/mason/Documents/Code/Minecraft Mainframes/common/build/devlibs/mcmf-common-1.0.0-dev.jar to /tmp/13963990380159220358.jar with 5 transformer(s) on dev.architectury.transformer.handler.SimpleTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
+[Architectury Transformer DEBUG] Writing com/github/masongulu/block/entity/GenericDeviceBlockEntity with maxs=true frames=true
+[Architectury Transformer DEBUG] Writing com/github/masongulu/block/entity/ModBlockEntities with maxs=true frames=true
 [Architectury Transformer DEBUG] Writing com/github/masongulu/block/entity/ComputerBlockEntity$1 with maxs=true frames=true
 [Architectury Transformer DEBUG] Writing com/github/masongulu/block/entity/ComputerBlockEntity with maxs=true frames=true
 [Architectury Transformer DEBUG] Writing com/github/masongulu/block/entity/RedstoneDeviceBlockEntity with maxs=true frames=true
 [Architectury Transformer DEBUG] Writing com/github/masongulu/block/entity/RedstoneEvent with maxs=true frames=true
-[Architectury Transformer DEBUG] Writing com/github/masongulu/block/entity/ModBlockEntities with maxs=true frames=true
 [Architectury Transformer DEBUG] Writing com/github/masongulu/block/CableBlock with maxs=true frames=true
+[Architectury Transformer DEBUG] Writing com/github/masongulu/block/GenericDeviceBlock with maxs=true frames=true
+[Architectury Transformer DEBUG] Writing com/github/masongulu/block/ModBlocks with maxs=true frames=true
 [Architectury Transformer DEBUG] Writing com/github/masongulu/block/ComputerBlock with maxs=true frames=true
 [Architectury Transformer DEBUG] Writing com/github/masongulu/block/RedstoneDeviceBlock with maxs=true frames=true
-[Architectury Transformer DEBUG] Writing com/github/masongulu/block/ModBlocks with maxs=true frames=true
-[Architectury Transformer DEBUG] Writing com/github/masongulu/uxn/UXN with maxs=true frames=true
 [Architectury Transformer DEBUG] Writing com/github/masongulu/uxn/devices/IDevice with maxs=true frames=true
 [Architectury Transformer DEBUG] Writing com/github/masongulu/uxn/devices/Device with maxs=true frames=true
 [Architectury Transformer DEBUG] Writing com/github/masongulu/uxn/devices/IDeviceProvider with maxs=true frames=true
@@ -126,6 +127,7 @@
 [Architectury Transformer DEBUG] Writing com/github/masongulu/uxn/devices/FileDev with maxs=true frames=true
 [Architectury Transformer DEBUG] Writing com/github/masongulu/uxn/MemoryRegion with maxs=true frames=true
 [Architectury Transformer DEBUG] Writing com/github/masongulu/uxn/Stack with maxs=true frames=true
+[Architectury Transformer DEBUG] Writing com/github/masongulu/uxn/UXN with maxs=true frames=true
 [Architectury Transformer DEBUG] Writing com/github/masongulu/uxn/UXNEvent with maxs=true frames=true
 [Architectury Transformer DEBUG] Writing com/github/masongulu/uxn/UXNExecutor with maxs=true frames=true
 [Architectury Transformer DEBUG] Writing com/github/masongulu/uxn/SystemDevice with maxs=true frames=true
@@ -137,139 +139,208 @@
 [Architectury Transformer DEBUG] Writing com/github/masongulu/item/memory/FileManager with maxs=true frames=true
 [Architectury Transformer DEBUG] Writing com/github/masongulu/item/ModItems with maxs=true frames=true
 [Architectury Transformer DEBUG] Writing com/github/masongulu/screen/MemorySlot with maxs=true frames=true
-[Architectury Transformer DEBUG] Writing com/github/masongulu/screen/ComputerMenu with maxs=true frames=true
 [Architectury Transformer DEBUG] Writing com/github/masongulu/screen/ComputerScreen with maxs=true frames=true
+[Architectury Transformer DEBUG] Writing com/github/masongulu/screen/GenericDeviceScreen with maxs=true frames=true
+[Architectury Transformer DEBUG] Writing com/github/masongulu/screen/ComputerMenu with maxs=true frames=true
 [Architectury Transformer DEBUG] Writing com/github/masongulu/screen/ModMenus with maxs=true frames=true
-[Architectury Transformer DEBUG] Writing com/github/masongulu/ComputerMod with maxs=true frames=true
+[Architectury Transformer DEBUG] Writing com/github/masongulu/screen/GenericDeviceMenu with maxs=true frames=true
+[Architectury Transformer DEBUG] Writing com/github/masongulu/serial/block/entity/SerialDeviceBlockEntity with maxs=true frames=true
+[Architectury Transformer DEBUG] Writing com/github/masongulu/serial/block/entity/SerialTerminalBlockEntity$1 with maxs=true frames=true
+[Architectury Transformer DEBUG] Writing com/github/masongulu/serial/block/entity/SerialTerminalBlockEntity with maxs=true frames=true
+[Architectury Transformer DEBUG] Writing com/github/masongulu/serial/block/entity/KeyEvent with maxs=true frames=true
+[Architectury Transformer DEBUG] Writing com/github/masongulu/serial/block/SerialCableBlock with maxs=true frames=true
+[Architectury Transformer DEBUG] Writing com/github/masongulu/serial/block/SerialDeviceBlock with maxs=true frames=true
+[Architectury Transformer DEBUG] Writing com/github/masongulu/serial/block/SerialTerminalBlock with maxs=true frames=true
+[Architectury Transformer DEBUG] Writing com/github/masongulu/serial/ISerialDevice with maxs=true frames=true
+[Architectury Transformer DEBUG] Writing com/github/masongulu/serial/SerialBus with maxs=true frames=true
+[Architectury Transformer DEBUG] Writing com/github/masongulu/serial/screen/SerialTerminalMenu with maxs=true frames=true
+[Architectury Transformer DEBUG] Writing com/github/masongulu/serial/screen/SerialTerminalScreen with maxs=true frames=true
 [Architectury Transformer DEBUG] Writing com/github/masongulu/Commands with maxs=true frames=true
+[Architectury Transformer DEBUG] Writing com/github/masongulu/ComputerMod with maxs=true frames=true
 [Architectury Transformer DEBUG] Checking whether /mcmf.mixins.json is a mixin config.
-[Architectury Transformer DEBUG] Closed File Systems for /tmp/16073039490128529234.jar
+[Architectury Transformer DEBUG] Closed File Systems for /tmp/13963990380159220358.jar
 [Architectury Transformer] Listening at /home/mason/Documents/Code/Minecraft Mainframes/common/build/devlibs/mcmf-common-1.0.0-dev.jar
-[Architectury Transformer DEBUG] Temporary jar [/tmp/16073039490128529234.jar] contains packages: com.github.masongulu.item, com.github.masongulu.uxn, com.github.masongulu.block.entity, com.github.masongulu.item.memory, com.github.masongulu.block, com.github.masongulu, com.github.masongulu.uxn.devices, com.github.masongulu.screen
+[Architectury Transformer DEBUG] Temporary jar [/tmp/13963990380159220358.jar] contains packages: com.github.masongulu.serial, com.github.masongulu.item, com.github.masongulu.serial.screen, com.github.masongulu.uxn, com.github.masongulu.block.entity, com.github.masongulu.item.memory, com.github.masongulu.block, com.github.masongulu, com.github.masongulu.serial.block.entity, com.github.masongulu.uxn.devices, com.github.masongulu.serial.block, com.github.masongulu.screen
 [Architectury Transformer DEBUG] Closed File Systems for /home/mason/Documents/Code/Minecraft Mainframes/common/build/devlibs/mcmf-common-1.0.0-dev.jar
 [Architectury Transformer DEBUG] Classpath entry [/home/mason/Documents/Code/Minecraft Mainframes/fabric/build/classes/java/main] contains packages: com.github.masongulu.fabric.client, com.github.masongulu.fabric.datagen, com.github.masongulu.fabric
 [Architectury Transformer DEBUG] Classpath entry [/home/mason/Documents/Code/Minecraft Mainframes/fabric/build/resources/main] contains packages: 
 [Architectury Transformer DEBUG] Transforming from com/github/masongulu/ComputerMod.class to com/github/masongulu/ComputerMod.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
 [Architectury Transformer DEBUG] Writing com/github/masongulu/ComputerMod with maxs=true frames=true
-[Architectury Transformer DEBUG] Transformed com/github/masongulu/ComputerMod in 6.392 ms
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/ComputerMod in 6.690 ms
 [Architectury Transformer DEBUG] Transforming from com/github/masongulu/uxn/UXNExecutor.class to com/github/masongulu/uxn/UXNExecutor.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
 [Architectury Transformer DEBUG] Writing com/github/masongulu/uxn/UXNExecutor with maxs=true frames=true
-[Architectury Transformer DEBUG] Transformed com/github/masongulu/uxn/UXNExecutor in 953.0 μs
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/uxn/UXNExecutor in 926.0 μs
 [Architectury Transformer DEBUG] Transforming from com/github/masongulu/block/ModBlocks.class to com/github/masongulu/block/ModBlocks.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
 [Architectury Transformer DEBUG] Writing com/github/masongulu/block/ModBlocks with maxs=true frames=true
-[Architectury Transformer DEBUG] Transformed com/github/masongulu/block/ModBlocks in 5.065 ms
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/block/ModBlocks in 1.620 ms
 [Architectury Transformer DEBUG] Transforming from com/github/masongulu/block/ComputerBlock.class to com/github/masongulu/block/ComputerBlock.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
 [Architectury Transformer DEBUG] Writing com/github/masongulu/block/ComputerBlock with maxs=true frames=true
-[Architectury Transformer DEBUG] Transformed com/github/masongulu/block/ComputerBlock in 2.025 ms
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/block/ComputerBlock in 2.091 ms
 [Architectury Transformer DEBUG] Transforming from com/github/masongulu/block/entity/ComputerBlockEntity.class to com/github/masongulu/block/entity/ComputerBlockEntity.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
 [Architectury Transformer DEBUG] Writing com/github/masongulu/block/entity/ComputerBlockEntity with maxs=true frames=true
-[Architectury Transformer DEBUG] Transformed com/github/masongulu/block/entity/ComputerBlockEntity in 2.291 ms
-[Architectury Transformer DEBUG] Transforming from com/github/masongulu/block/CableBlock.class to com/github/masongulu/block/CableBlock.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/block/entity/ComputerBlockEntity in 6.407 ms
+[Architectury Transformer DEBUG] Transforming from com/github/masongulu/serial/block/SerialDeviceBlock.class to com/github/masongulu/serial/block/SerialDeviceBlock.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
-[Architectury Transformer DEBUG] Writing com/github/masongulu/block/CableBlock with maxs=true frames=true
-[Architectury Transformer DEBUG] Transformed com/github/masongulu/block/CableBlock in 734.5 μs
-[Architectury Transformer DEBUG] Transforming from com/github/masongulu/block/RedstoneDeviceBlock.class to com/github/masongulu/block/RedstoneDeviceBlock.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
+[Architectury Transformer DEBUG] Writing com/github/masongulu/serial/block/SerialDeviceBlock with maxs=true frames=true
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/serial/block/SerialDeviceBlock in 728.3 μs
+[Architectury Transformer DEBUG] Transforming from com/github/masongulu/block/GenericDeviceBlock.class to com/github/masongulu/block/GenericDeviceBlock.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
-[Architectury Transformer DEBUG] Writing com/github/masongulu/block/RedstoneDeviceBlock with maxs=true frames=true
-[Architectury Transformer DEBUG] Transformed com/github/masongulu/block/RedstoneDeviceBlock in 2.084 ms
-[Architectury Transformer DEBUG] Transforming from com/github/masongulu/block/entity/RedstoneDeviceBlockEntity.class to com/github/masongulu/block/entity/RedstoneDeviceBlockEntity.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
+[Architectury Transformer DEBUG] Writing com/github/masongulu/block/GenericDeviceBlock with maxs=true frames=true
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/block/GenericDeviceBlock in 7.239 ms
+[Architectury Transformer DEBUG] Transforming from com/github/masongulu/serial/block/entity/SerialDeviceBlockEntity.class to com/github/masongulu/serial/block/entity/SerialDeviceBlockEntity.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
-[Architectury Transformer DEBUG] Writing com/github/masongulu/block/entity/RedstoneDeviceBlockEntity with maxs=true frames=true
-[Architectury Transformer DEBUG] Transformed com/github/masongulu/block/entity/RedstoneDeviceBlockEntity in 8.784 ms
+[Architectury Transformer DEBUG] Writing com/github/masongulu/serial/block/entity/SerialDeviceBlockEntity with maxs=true frames=true
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/serial/block/entity/SerialDeviceBlockEntity in 936.5 μs
 [Architectury Transformer DEBUG] Transforming from com/github/masongulu/uxn/devices/IDevice.class to com/github/masongulu/uxn/devices/IDevice.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
 [Architectury Transformer DEBUG] Writing com/github/masongulu/uxn/devices/IDevice with maxs=true frames=true
-[Architectury Transformer DEBUG] Transformed com/github/masongulu/uxn/devices/IDevice in 5.680 ms
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/uxn/devices/IDevice in 465.2 μs
+[Architectury Transformer DEBUG] Transforming from com/github/masongulu/serial/ISerialDevice.class to com/github/masongulu/serial/ISerialDevice.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
+[Architectury Transformer DEBUG] Found class transformer
+[Architectury Transformer DEBUG] Writing com/github/masongulu/serial/ISerialDevice with maxs=true frames=true
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/serial/ISerialDevice in 435.8 μs
+[Architectury Transformer DEBUG] Transforming from com/github/masongulu/block/entity/GenericDeviceBlockEntity.class to com/github/masongulu/block/entity/GenericDeviceBlockEntity.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
+[Architectury Transformer DEBUG] Found class transformer
+[Architectury Transformer DEBUG] Writing com/github/masongulu/block/entity/GenericDeviceBlockEntity with maxs=true frames=true
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/block/entity/GenericDeviceBlockEntity in 866.8 μs
 [Architectury Transformer DEBUG] Transforming from com/github/masongulu/uxn/devices/IDeviceProvider.class to com/github/masongulu/uxn/devices/IDeviceProvider.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
 [Architectury Transformer DEBUG] Writing com/github/masongulu/uxn/devices/IDeviceProvider with maxs=true frames=true
-[Architectury Transformer DEBUG] Transformed com/github/masongulu/uxn/devices/IDeviceProvider in 495.3 μs
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/uxn/devices/IDeviceProvider in 333.4 μs
+[Architectury Transformer DEBUG] Transforming from com/github/masongulu/serial/block/SerialCableBlock.class to com/github/masongulu/serial/block/SerialCableBlock.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
+[Architectury Transformer DEBUG] Found class transformer
+[Architectury Transformer DEBUG] Writing com/github/masongulu/serial/block/SerialCableBlock with maxs=true frames=true
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/serial/block/SerialCableBlock in 660.1 μs
+[Architectury Transformer DEBUG] Transforming from com/github/masongulu/serial/block/SerialTerminalBlock.class to com/github/masongulu/serial/block/SerialTerminalBlock.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
+[Architectury Transformer DEBUG] Found class transformer
+[Architectury Transformer DEBUG] Writing com/github/masongulu/serial/block/SerialTerminalBlock with maxs=true frames=true
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/serial/block/SerialTerminalBlock in 839.1 μs
+[Architectury Transformer DEBUG] Transforming from com/github/masongulu/serial/block/entity/SerialTerminalBlockEntity.class to com/github/masongulu/serial/block/entity/SerialTerminalBlockEntity.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
+[Architectury Transformer DEBUG] Found class transformer
+[Architectury Transformer DEBUG] Writing com/github/masongulu/serial/block/entity/SerialTerminalBlockEntity with maxs=true frames=true
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/serial/block/entity/SerialTerminalBlockEntity in 2.055 ms
+[Architectury Transformer DEBUG] Transforming from com/github/masongulu/block/CableBlock.class to com/github/masongulu/block/CableBlock.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
+[Architectury Transformer DEBUG] Found class transformer
+[Architectury Transformer DEBUG] Writing com/github/masongulu/block/CableBlock with maxs=true frames=true
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/block/CableBlock in 627.2 μs
+[Architectury Transformer DEBUG] Transforming from com/github/masongulu/block/RedstoneDeviceBlock.class to com/github/masongulu/block/RedstoneDeviceBlock.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
+[Architectury Transformer DEBUG] Found class transformer
+[Architectury Transformer DEBUG] Writing com/github/masongulu/block/RedstoneDeviceBlock with maxs=true frames=true
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/block/RedstoneDeviceBlock in 5.260 ms
+[Architectury Transformer DEBUG] Transforming from com/github/masongulu/block/entity/RedstoneDeviceBlockEntity.class to com/github/masongulu/block/entity/RedstoneDeviceBlockEntity.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
+[Architectury Transformer DEBUG] Found class transformer
+[Architectury Transformer DEBUG] Writing com/github/masongulu/block/entity/RedstoneDeviceBlockEntity with maxs=true frames=true
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/block/entity/RedstoneDeviceBlockEntity in 5.080 ms
 [Architectury Transformer DEBUG] Transforming from com/github/masongulu/item/ModItems.class to com/github/masongulu/item/ModItems.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
 [Architectury Transformer DEBUG] Writing com/github/masongulu/item/ModItems with maxs=true frames=true
-[Architectury Transformer DEBUG] Transformed com/github/masongulu/item/ModItems in 3.939 ms
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/item/ModItems in 1.383 ms
 [Architectury Transformer DEBUG] Transforming from com/github/masongulu/item/memory/SROMItem.class to com/github/masongulu/item/memory/SROMItem.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
 [Architectury Transformer DEBUG] Writing com/github/masongulu/item/memory/SROMItem with maxs=true frames=true
-[Architectury Transformer DEBUG] Transformed com/github/masongulu/item/memory/SROMItem in 697.6 μs
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/item/memory/SROMItem in 675.4 μs
 [Architectury Transformer DEBUG] Transforming from com/github/masongulu/item/memory/MemoryItem.class to com/github/masongulu/item/memory/MemoryItem.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
 [Architectury Transformer DEBUG] Writing com/github/masongulu/item/memory/MemoryItem with maxs=true frames=true
-[Architectury Transformer DEBUG] Transformed com/github/masongulu/item/memory/MemoryItem in 1.148 ms
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/item/memory/MemoryItem in 2.609 ms
 [Architectury Transformer DEBUG] Transforming from com/github/masongulu/item/memory/RAMItem.class to com/github/masongulu/item/memory/RAMItem.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
 [Architectury Transformer DEBUG] Writing com/github/masongulu/item/memory/RAMItem with maxs=true frames=true
-[Architectury Transformer DEBUG] Transformed com/github/masongulu/item/memory/RAMItem in 457.0 μs
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/item/memory/RAMItem in 560.6 μs
 [Architectury Transformer DEBUG] Transforming from com/github/masongulu/block/entity/ModBlockEntities.class to com/github/masongulu/block/entity/ModBlockEntities.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
 [Architectury Transformer DEBUG] Writing com/github/masongulu/block/entity/ModBlockEntities with maxs=true frames=true
-[Architectury Transformer DEBUG] Transformed com/github/masongulu/block/entity/ModBlockEntities in 942.9 μs
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/block/entity/ModBlockEntities in 5.003 ms
 [Architectury Transformer DEBUG] Transforming from com/github/masongulu/screen/ComputerMenu.class to com/github/masongulu/screen/ComputerMenu.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
 [Architectury Transformer DEBUG] Writing com/github/masongulu/screen/ComputerMenu with maxs=true frames=true
-[Architectury Transformer DEBUG] Transformed com/github/masongulu/screen/ComputerMenu in 1.428 ms
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/screen/ComputerMenu in 1.238 ms
+[Architectury Transformer DEBUG] Transforming from com/github/masongulu/screen/GenericDeviceMenu.class to com/github/masongulu/screen/GenericDeviceMenu.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
+[Architectury Transformer DEBUG] Found class transformer
+[Architectury Transformer DEBUG] Writing com/github/masongulu/screen/GenericDeviceMenu with maxs=true frames=true
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/screen/GenericDeviceMenu in 851.9 μs
 [Architectury Transformer DEBUG] Transforming from com/github/masongulu/uxn/UXNEvent.class to com/github/masongulu/uxn/UXNEvent.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
 [Architectury Transformer DEBUG] Writing com/github/masongulu/uxn/UXNEvent with maxs=true frames=true
-[Architectury Transformer DEBUG] Transformed com/github/masongulu/uxn/UXNEvent in 484.9 μs
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/uxn/UXNEvent in 430.9 μs
+[Architectury Transformer DEBUG] Transforming from com/github/masongulu/serial/screen/SerialTerminalMenu.class to com/github/masongulu/serial/screen/SerialTerminalMenu.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
+[Architectury Transformer DEBUG] Found class transformer
+[Architectury Transformer DEBUG] Writing com/github/masongulu/serial/screen/SerialTerminalMenu with maxs=true frames=true
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/serial/screen/SerialTerminalMenu in 856.2 μs
 [Architectury Transformer DEBUG] Transforming from com/github/masongulu/Commands.class to com/github/masongulu/Commands.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
 [Architectury Transformer DEBUG] Writing com/github/masongulu/Commands with maxs=true frames=true
-[Architectury Transformer DEBUG] Transformed com/github/masongulu/Commands in 1.598 ms
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/Commands in 775.9 μs
 [Architectury Transformer DEBUG] Transforming from com/github/masongulu/screen/ModMenus.class to com/github/masongulu/screen/ModMenus.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
 [Architectury Transformer DEBUG] Writing com/github/masongulu/screen/ModMenus with maxs=true frames=true
-[Architectury Transformer DEBUG] Transformed com/github/masongulu/screen/ModMenus in 2.982 ms
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/screen/ModMenus in 1.090 ms
 [Architectury Transformer DEBUG] Transforming from com/github/masongulu/screen/MemorySlot.class to com/github/masongulu/screen/MemorySlot.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
 [Architectury Transformer DEBUG] Writing com/github/masongulu/screen/MemorySlot with maxs=true frames=true
-[Architectury Transformer DEBUG] Transformed com/github/masongulu/screen/MemorySlot in 610.4 μs
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/screen/MemorySlot in 515.1 μs
 [Architectury Transformer DEBUG] Transforming from com/github/masongulu/screen/ComputerScreen.class to com/github/masongulu/screen/ComputerScreen.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
 [Architectury Transformer DEBUG] Writing com/github/masongulu/screen/ComputerScreen with maxs=true frames=true
-[Architectury Transformer DEBUG] Transformed com/github/masongulu/screen/ComputerScreen in 2.834 ms
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/screen/ComputerScreen in 5.699 ms
+[Architectury Transformer DEBUG] Transforming from com/github/masongulu/screen/GenericDeviceScreen.class to com/github/masongulu/screen/GenericDeviceScreen.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
+[Architectury Transformer DEBUG] Found class transformer
+[Architectury Transformer DEBUG] Writing com/github/masongulu/screen/GenericDeviceScreen with maxs=true frames=true
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/screen/GenericDeviceScreen in 5.059 ms
+[Architectury Transformer DEBUG] Transforming from com/github/masongulu/serial/screen/SerialTerminalScreen.class to com/github/masongulu/serial/screen/SerialTerminalScreen.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
+[Architectury Transformer DEBUG] Found class transformer
+[Architectury Transformer DEBUG] Writing com/github/masongulu/serial/screen/SerialTerminalScreen with maxs=true frames=true
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/serial/screen/SerialTerminalScreen in 4.828 ms
+[Architectury Transformer DEBUG] Transforming from com/github/masongulu/serial/SerialBus.class to com/github/masongulu/serial/SerialBus.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
+[Architectury Transformer DEBUG] Found class transformer
+[Architectury Transformer DEBUG] Writing com/github/masongulu/serial/SerialBus with maxs=true frames=true
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/serial/SerialBus in 833.7 μs
 [Architectury Transformer DEBUG] Transforming from com/github/masongulu/block/entity/ComputerBlockEntity$1.class to com/github/masongulu/block/entity/ComputerBlockEntity$1.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
 [Architectury Transformer DEBUG] Writing com/github/masongulu/block/entity/ComputerBlockEntity$1 with maxs=true frames=true
-[Architectury Transformer DEBUG] Transformed com/github/masongulu/block/entity/ComputerBlockEntity$1 in 535.8 μs
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/block/entity/ComputerBlockEntity$1 in 442.7 μs
 [Architectury Transformer DEBUG] Transforming from com/github/masongulu/uxn/UXNBus.class to com/github/masongulu/uxn/UXNBus.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
 [Architectury Transformer DEBUG] Writing com/github/masongulu/uxn/UXNBus with maxs=true frames=true
-[Architectury Transformer DEBUG] Transformed com/github/masongulu/uxn/UXNBus in 1.312 ms
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/uxn/UXNBus in 947.1 μs
+[Architectury Transformer DEBUG] Transforming from com/github/masongulu/serial/block/entity/SerialTerminalBlockEntity$1.class to com/github/masongulu/serial/block/entity/SerialTerminalBlockEntity$1.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
+[Architectury Transformer DEBUG] Found class transformer
+[Architectury Transformer DEBUG] Writing com/github/masongulu/serial/block/entity/SerialTerminalBlockEntity$1 with maxs=true frames=true
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/serial/block/entity/SerialTerminalBlockEntity$1 in 552.9 μs
 [Architectury Transformer DEBUG] Transforming from com/github/masongulu/uxn/MemoryRegion.class to com/github/masongulu/uxn/MemoryRegion.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
 [Architectury Transformer DEBUG] Writing com/github/masongulu/uxn/MemoryRegion with maxs=true frames=true
-[Architectury Transformer DEBUG] Transformed com/github/masongulu/uxn/MemoryRegion in 1.499 ms
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/uxn/MemoryRegion in 1.118 ms
 [Architectury Transformer DEBUG] Transforming from com/github/masongulu/item/memory/FileManager.class to com/github/masongulu/item/memory/FileManager.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
 [Architectury Transformer DEBUG] Writing com/github/masongulu/item/memory/FileManager with maxs=true frames=true
-[Architectury Transformer DEBUG] Transformed com/github/masongulu/item/memory/FileManager in 1.675 ms
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/item/memory/FileManager in 1.342 ms
 [Architectury Transformer DEBUG] Transforming from com/github/masongulu/uxn/UXN.class to com/github/masongulu/uxn/UXN.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
 [Architectury Transformer DEBUG] Writing com/github/masongulu/uxn/UXN with maxs=true frames=true
-[Architectury Transformer DEBUG] Transformed com/github/masongulu/uxn/UXN in 8.084 ms
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/uxn/UXN in 4.099 ms
 [Architectury Transformer DEBUG] Transforming from com/github/masongulu/uxn/Stack.class to com/github/masongulu/uxn/Stack.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
 [Architectury Transformer DEBUG] Writing com/github/masongulu/uxn/Stack with maxs=true frames=true
-[Architectury Transformer DEBUG] Transformed com/github/masongulu/uxn/Stack in 2.527 ms
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/uxn/Stack in 1.381 ms
 [Architectury Transformer DEBUG] Transforming from com/github/masongulu/uxn/devices/Device.class to com/github/masongulu/uxn/devices/Device.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
 [Architectury Transformer DEBUG] Writing com/github/masongulu/uxn/devices/Device with maxs=true frames=true
-[Architectury Transformer DEBUG] Transformed com/github/masongulu/uxn/devices/Device in 1.057 ms
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/uxn/devices/Device in 461.9 μs
 [Architectury Transformer DEBUG] Transforming from com/github/masongulu/uxn/SystemDevice.class to com/github/masongulu/uxn/SystemDevice.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
 [Architectury Transformer DEBUG] Writing com/github/masongulu/uxn/SystemDevice with maxs=true frames=true
-[Architectury Transformer DEBUG] Transformed com/github/masongulu/uxn/SystemDevice in 1.295 ms
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/uxn/SystemDevice in 756.5 μs
 [Architectury Transformer DEBUG] Transforming from com/github/masongulu/uxn/BootEvent.class to com/github/masongulu/uxn/BootEvent.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
 [Architectury Transformer DEBUG] Writing com/github/masongulu/uxn/BootEvent with maxs=true frames=true
-[Architectury Transformer DEBUG] Transformed com/github/masongulu/uxn/BootEvent in 759.7 μs
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/uxn/BootEvent in 438.5 μs
 [Architectury Transformer DEBUG] Transforming from com/github/masongulu/block/entity/RedstoneEvent.class to com/github/masongulu/block/entity/RedstoneEvent.class with 5 transformer(s) on dev.architectury.transformer.handler.TinyRemapperPreparedTransformerHandler
 [Architectury Transformer DEBUG] Found class transformer
 [Architectury Transformer DEBUG] Writing com/github/masongulu/block/entity/RedstoneEvent with maxs=true frames=true
-[Architectury Transformer DEBUG] Transformed com/github/masongulu/block/entity/RedstoneEvent in 1.083 ms
+[Architectury Transformer DEBUG] Transformed com/github/masongulu/block/entity/RedstoneEvent in 538.9 μs

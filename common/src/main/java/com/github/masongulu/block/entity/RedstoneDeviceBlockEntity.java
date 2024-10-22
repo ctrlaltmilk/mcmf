@@ -6,6 +6,8 @@ import com.github.masongulu.uxn.devices.IDevice;
 import com.github.masongulu.uxn.devices.IDeviceProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -15,7 +17,7 @@ import java.util.Map;
 
 import static com.github.masongulu.block.entity.ModBlockEntities.REDSTONE_DEVICE_BLOCK_ENTITY;
 
-public class RedstoneDeviceBlockEntity extends BlockEntity implements IDevice, IDeviceProvider {
+public class RedstoneDeviceBlockEntity extends GenericDeviceBlockEntity implements IDevice {
     private UXNBus bus;
     private int deviceNumber = 9;
     public final Map<Direction,Integer> redstoneOutputs = new HashMap<>();
@@ -119,6 +121,11 @@ public class RedstoneDeviceBlockEntity extends BlockEntity implements IDevice, I
     @Override
     public IDevice getDevice(Direction attachSide) {
         return this;
+    }
+
+    @Override
+    protected Component getDefaultName() {
+        return new TextComponent("Redstone Device");
     }
 }
 

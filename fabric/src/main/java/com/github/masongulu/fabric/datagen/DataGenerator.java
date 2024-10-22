@@ -37,6 +37,8 @@ public class DataGenerator implements DataGeneratorEntrypoint {
         protected void generateTags() {
             getOrCreateTagBuilder(DEVICE_CABLE)
                     .add(CABLE_BLOCK.get());
+            getOrCreateTagBuilder(SERIAL_CABLE)
+                    .add(SERIAL_CABLE_BLOCK.get());
         }
     }
 

@@ -1,5 +1,5 @@
-[03:27:35] [main/INFO] (FabricLoader/GameProvider) Loading Minecraft 1.18.2 with Fabric Loader 0.16.5
-[03:27:35] [main/INFO] (FabricLoader) Loading 43 mods:
+[22:48:23] [main/INFO] (FabricLoader/GameProvider) Loading Minecraft 1.18.2 with Fabric Loader 0.16.5
+[22:48:23] [main/INFO] (FabricLoader) Loading 43 mods:
 	- architectury 4.12.94
 	- fabric-api 0.77.0+1.18.2
 	- fabric-api-base 0.4.5+64b7c69360
@@ -38,19 +38,19 @@
 	- fabric-transfer-api-v1 1.6.4+f4563ac860
 	- fabric-transitive-access-wideners-v1 1.1.0+e747827960
 	- fabricloader 0.16.5
-	- generated_094d633 1.0.0
+	- generated_bb0f0b2 1.0.0
 	- java 17
 	- mcmf 1.0.0
 	- minecraft 1.18.2
 	- mixinextras 0.4.1
-[03:27:35] [main/INFO] (FabricLoader/Mixin) SpongePowered MIXIN Subsystem Version=0.8.7 Source=file:/home/mason/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.15.3+mixin.0.8.7/51ee0a44ab05f6fddd66b09e66b3a16904f9c55d/sponge-mixin-0.15.3+mixin.0.8.7.jar Service=Knot/Fabric Env=SERVER
-[03:27:36] [main/INFO] (FabricLoader/Mixin) Loaded Fabric development mappings for mixin remapper!
-[03:27:36] [main/INFO] (FabricLoader/Mixin) Compatibility level set to JAVA_16
-[03:27:36] [main/INFO] (FabricLoader/Mixin) Compatibility level set to JAVA_17
-[03:27:36] [main/INFO] (FabricLoader/MixinExtras|Service) Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.4.1).
-[03:27:44] [main/INFO] (FabricDataGenHelper) Running data generator for mcmf
-[03:27:44] [main/INFO] (Minecraft) Starting provider: Block Tags
-[03:27:44] [main/INFO] (Minecraft) Block Tags finished after 188 ms
-[03:27:44] [main/INFO] (Minecraft) Starting provider: Models
-[03:27:44] [main/INFO] (Minecraft) Models finished after 240 ms
-[03:27:44] [main/INFO] (Minecraft) All providers took: 433 ms
+[22:48:23] [main/INFO] (FabricLoader/Mixin) SpongePowered MIXIN Subsystem Version=0.8.7 Source=file:/home/mason/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.15.3+mixin.0.8.7/51ee0a44ab05f6fddd66b09e66b3a16904f9c55d/sponge-mixin-0.15.3+mixin.0.8.7.jar Service=Knot/Fabric Env=SERVER
+[22:48:24] [main/INFO] (FabricLoader/Mixin) Loaded Fabric development mappings for mixin remapper!
+[22:48:24] [main/INFO] (FabricLoader/Mixin) Compatibility level set to JAVA_16
+[22:48:24] [main/INFO] (FabricLoader/Mixin) Compatibility level set to JAVA_17
+[22:48:24] [main/INFO] (FabricLoader/MixinExtras|Service) Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.4.1).
+[22:48:32] [main/INFO] (FabricDataGenHelper) Running data generator for mcmf
+[22:48:32] [main/INFO] (Minecraft) Starting provider: Block Tags
+[22:48:32] [main/INFO] (Minecraft) Block Tags finished after 82 ms
+[22:48:32] [main/INFO] (Minecraft) Starting provider: Models
+[22:48:32] [main/INFO] (Minecraft) Models finished after 117 ms
+[22:48:32] [main/INFO] (Minecraft) All providers took: 203 ms
