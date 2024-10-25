@@ -13,7 +13,7 @@ public class CalendarDev extends Device{
 
     @Override
     public void read(int address) {
-        byte data = bus.readDev(address);
+        int data = bus.readDev(address);
         int port = address & 0x0F;
         if (port >= 0x0B) {return;}
         byte write = switch (port) {

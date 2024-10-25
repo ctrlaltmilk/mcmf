@@ -117,14 +117,14 @@ public class UXNBus {
         refresh(this.computerEntity.getLevel(), this.computerEntity.getBlockPos(), ignore);
     }
 
-    public void writeDev(int address, byte data) {
+    public void writeDev(int address, int data) {
         address %= 256;
-        deviceMemory[address] = data;
+        deviceMemory[address] = (byte)data;
     }
 
-    public byte readDev(int address) {
+    public int readDev(int address) {
         address %= 256;
-        return deviceMemory[address];
+        return deviceMemory[address] & 0xFF;
     }
 
     public void setUxn(UXN uxn) {

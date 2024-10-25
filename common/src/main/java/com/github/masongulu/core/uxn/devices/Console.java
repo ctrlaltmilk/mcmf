@@ -38,7 +38,7 @@ public class Console extends Device {
 
     @Override
     public void write(int address) {
-        byte data = bus.readDev(address);
+        int data = bus.readDev(address);
         int port = address & 0x0F;
         switch (port) {
             case 0x08 -> {

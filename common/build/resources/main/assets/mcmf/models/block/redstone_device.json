@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/orientable",
-  "textures": {
-    "top": "mcmf:block/redstone_device_top",
-    "front": "mcmf:block/redstone_device_front",
-    "side": "mcmf:block/redstone_device_side"
-  }
-}

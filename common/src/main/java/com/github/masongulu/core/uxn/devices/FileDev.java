@@ -11,7 +11,7 @@ public class FileDev extends Device {
     @SuppressWarnings("ResultOfMethodCallIgnored")
     @Override
     public void write(int address) {
-        byte data = bus.readDev(address);
+        int data = bus.readDev(address);
         int devid = address & 0xF0;
         int port = address & 0x0F;
         switch (port) {

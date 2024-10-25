@@ -34,7 +34,7 @@ public class SerialDeviceBlockEntity extends GenericDeviceBlockEntity implements
 
     @Override
     public void write(int address) {
-        byte data = bus.readDev(address);
+        int data = bus.readDev(address);
         int port = address & 0x0F;
         switch (port) {
             case 0x08 -> {
@@ -117,7 +117,7 @@ class KeyEvent implements UXNEvent {
 
     @Override
     public void handle(UXNBus bus) {
-        bus.uxn.pc = (bus.readDev(0x10) << 8) | bus.readDev(0x11); //get the vector for PC at the time the event is handled
+        bus.uxn.pc = (bus.readDev(device) << 8) | bus.readDev(device+1); //get the vector for PC at the time the event is handled
         bus.writeDev(device + 0x02, (byte) ch);
         bus.writeDev(device + 0x07, type);
     }
