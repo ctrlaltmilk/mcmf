@@ -1,6 +1,5 @@
 package com.github.masongulu.item;
 
-import com.github.masongulu.item.memory.MemoryItem;
 import com.github.masongulu.item.memory.RAMItem;
 import com.github.masongulu.item.memory.SROMItem;
 import dev.architectury.registry.registries.DeferredRegister;

@@ -1,13 +1,11 @@
 package com.github.masongulu;
 
-import com.github.masongulu.block.ModBlocks;
-import com.github.masongulu.block.entity.ModBlockEntities;
 import com.github.masongulu.item.ModItems;
-import com.github.masongulu.screen.ModMenus;
-import com.github.masongulu.serial.SerialBus;
-import com.github.masongulu.uxn.UXNBus;
-import com.github.masongulu.uxn.UXNExecutor;
-import com.github.masongulu.uxn.devices.Console;
+import com.github.masongulu.serial.ISerialPeer;
+import com.github.masongulu.serial.block.entity.SerialPeerBlockEntity;
+import com.github.masongulu.core.uxn.UXNBus;
+import com.github.masongulu.core.uxn.UXNExecutor;
+import com.github.masongulu.core.uxn.devices.Console;
 import dev.architectury.event.EventResult;
 import dev.architectury.event.events.common.BlockEvent;
 import dev.architectury.event.events.common.TickEvent;
@@ -16,8 +14,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import static com.github.masongulu.block.ModBlocks.DEVICE_CABLE;
-import static com.github.masongulu.block.ModBlocks.SERIAL_CABLE;
+import static com.github.masongulu.ModBlocks.DEVICE_CABLE;
+import static com.github.masongulu.ModBlocks.SERIAL_CABLE;
 
 public final class ComputerMod {
     public static final String MOD_ID = "mcmf";
@@ -46,9 +44,9 @@ public final class ComputerMod {
                     bus.refresh(pos);
                 }
             } else if (state.is(SERIAL_CABLE)) {
-                SerialBus sbus = SerialBus.findBus(level, pos);
+                ISerialPeer sbus = SerialPeerBlockEntity.findSerialDevice(level, pos);
                 if (sbus != null) {
-                    sbus.refresh(pos);
+                    SerialPeerBlockEntity.refresh(sbus, level, sbus.getPos(), pos);
                 }
             }
             return EventResult.pass();
@@ -60,9 +58,9 @@ public final class ComputerMod {
                     bus.refresh(level, pos);
                 }
             } else if (state.is(SERIAL_CABLE)) {
-                SerialBus sbus = SerialBus.findBus(level, pos);
+                ISerialPeer sbus = SerialPeerBlockEntity.findSerialDevice(level, pos);
                 if (sbus != null) {
-                    sbus.refresh(level, pos);
+                    SerialPeerBlockEntity.refresh(sbus, level, pos);
                 }
             }
             return EventResult.pass();

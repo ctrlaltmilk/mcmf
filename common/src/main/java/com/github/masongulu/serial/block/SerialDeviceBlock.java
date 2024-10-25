@@ -1,6 +1,6 @@
 package com.github.masongulu.serial.block;
 
-import com.github.masongulu.block.GenericDeviceBlock;
+import com.github.masongulu.computer.block.GenericDeviceBlock;
 import com.github.masongulu.serial.block.entity.SerialDeviceBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;

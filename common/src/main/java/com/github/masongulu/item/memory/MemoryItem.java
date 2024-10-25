@@ -1,6 +1,6 @@
 package com.github.masongulu.item.memory;
 
-import com.github.masongulu.uxn.MemoryRegion;
+import com.github.masongulu.core.uxn.MemoryRegion;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;

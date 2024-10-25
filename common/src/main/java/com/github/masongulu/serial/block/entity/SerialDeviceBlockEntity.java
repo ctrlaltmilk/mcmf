@@ -1,30 +1,25 @@
 package com.github.masongulu.serial.block.entity;
 
-import com.github.masongulu.block.entity.GenericDeviceBlockEntity;
-import com.github.masongulu.serial.ISerialDevice;
-import com.github.masongulu.serial.SerialBus;
-import com.github.masongulu.uxn.UXNBus;
-import com.github.masongulu.uxn.UXNEvent;
-import com.github.masongulu.uxn.devices.IDevice;
+import com.github.masongulu.computer.block.entity.GenericDeviceBlockEntity;
+import com.github.masongulu.serial.ISerialPeer;
+import com.github.masongulu.core.uxn.UXNBus;
+import com.github.masongulu.core.uxn.UXNEvent;
+import com.github.masongulu.core.uxn.devices.IDevice;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.level.block.state.BlockState;
 
-import static com.github.masongulu.block.entity.ModBlockEntities.SERIAL_DEVICE_BLOCK_ENTITY;
+import static com.github.masongulu.ModBlockEntities.SERIAL_DEVICE_BLOCK_ENTITY;
 
-public class SerialDeviceBlockEntity extends GenericDeviceBlockEntity implements IDevice, ISerialDevice {
-    private SerialBus sbus;
+public class SerialDeviceBlockEntity extends GenericDeviceBlockEntity implements IDevice, ISerialPeer {
+    private ISerialPeer peer;
     private UXNBus bus;
     protected int deviceNumber = 1;
+    private boolean conflicting = false;
     public SerialDeviceBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(SERIAL_DEVICE_BLOCK_ENTITY.get(), blockPos, blockState);
-        this.sbus = new SerialBus(this);
-    }
-
-    public SerialBus getSbus() {
-        return sbus;
     }
 
     @Override
@@ -43,7 +38,8 @@ public class SerialDeviceBlockEntity extends GenericDeviceBlockEntity implements
         int port = address & 0x0F;
         switch (port) {
             case 0x08 -> {
-                this.sbus.write(this, (char) data);
+                if (this.peer != null)
+                    this.peer.write((char) data);
             }
             case 0x09 -> {
                 // TODO fix this
@@ -61,7 +57,7 @@ public class SerialDeviceBlockEntity extends GenericDeviceBlockEntity implements
     public void attach(UXNBus bus) {
         this.bus = bus;
         this.bus.setDevice(deviceNumber, this);
-        this.sbus.refresh();
+        SerialPeerBlockEntity.refresh(this, this.getLevel(), this.getBlockPos());
     }
 
     @Override
@@ -71,16 +67,34 @@ public class SerialDeviceBlockEntity extends GenericDeviceBlockEntity implements
     }
 
     @Override
-    public void attach(SerialBus bus) {
+    public void attach(ISerialPeer bus) {
+        peer = bus;
     }
 
     @Override
-    public void detach(SerialBus bus) {
+    public void detach(ISerialPeer bus) {
+        peer = null;
     }
 
     @Override
     public void write(char ch) {
-        bus.queueEvent(new KeyEvent(ch, (byte) 0x01, (byte) (deviceNumber << 4)));
+        if (bus != null) {
+            bus.queueEvent(new KeyEvent(ch, (byte) 0x01, (byte) (deviceNumber << 4)));
+        }
+    }
+
+    @Override
+    public void setConflicting(boolean b) {
+        conflicting = b;
+    }
+
+    @Override
+    public ISerialPeer getPeer() {
+        return peer;
+    }
+
+    public BlockPos getPos() {
+        return this.getBlockPos();
     }
 }
 

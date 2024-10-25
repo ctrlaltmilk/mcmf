@@ -1,7 +1,8 @@
 package com.github.masongulu.serial.screen;
 
-import com.github.masongulu.screen.ModMenus;
+import com.github.masongulu.ModMenus;
 import com.github.masongulu.serial.block.entity.SerialTerminalBlockEntity;
+import com.github.masongulu.serial.block.entity.SerialTerminalContainerData;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
@@ -19,7 +20,7 @@ public class SerialTerminalMenu extends AbstractContainerMenu {
         return s.toString();
     }
     public SerialTerminalMenu(int i, Inventory inventory) {
-        this(i, inventory, null, new SimpleContainerData(SerialTerminalBlockEntity.width*SerialTerminalBlockEntity.height));
+        this(i, inventory, null, new SimpleContainerData(SerialTerminalContainerData.MAX_SIZE));
     }
 
     public SerialTerminalMenu(int i, Inventory inventory, SerialTerminalBlockEntity termBlockEntity, ContainerData data) {
@@ -55,7 +56,15 @@ public class SerialTerminalMenu extends AbstractContainerMenu {
 
     @Override
     public boolean clickMenuButton(Player player, int i) {
+        if (i == 0) {
+            blockEntity.echo = !blockEntity.echo;
+            return true;
+        } else if (i == 1) {
+            // change font
+            blockEntity.nextFont();
+            return true;
+        }
+        blockEntity.keyPress((char) (i - 2));
         return true;
     }
-
 }

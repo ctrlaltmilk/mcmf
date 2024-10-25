@@ -1,6 +1,6 @@
 package com.github.masongulu.item.memory;
 
-import com.github.masongulu.uxn.MemoryRegion;
+import com.github.masongulu.core.uxn.MemoryRegion;
 import net.minecraft.world.item.ItemStack;
 
 public class SROMItem extends MemoryItem {

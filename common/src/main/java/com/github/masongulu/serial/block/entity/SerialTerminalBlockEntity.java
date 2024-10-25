@@ -1,8 +1,8 @@
 package com.github.masongulu.serial.block.entity;
 
-import com.github.masongulu.serial.ISerialDevice;
-import com.github.masongulu.serial.SerialBus;
+import com.github.masongulu.serial.TerminalFont;
 import com.github.masongulu.serial.screen.SerialTerminalMenu;
+import com.github.masongulu.serial.screen.SerialTerminalScreen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
@@ -12,55 +12,46 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.ArrayList;
 
-import static com.github.masongulu.block.entity.ModBlockEntities.SERIAL_DEVICE_BLOCK_ENTITY;
+import static com.github.masongulu.ModBlockEntities.SERIAL_DEVICE_BLOCK_ENTITY;
 
-public class SerialTerminalBlockEntity extends BaseContainerBlockEntity implements MenuProvider, ISerialDevice {
-    private SerialBus sbus;
-    public static final int width = 30;
-    public static final int height = 8;
-    private final ArrayList<String> text = new ArrayList<>();
-    private final ContainerData data = new ContainerData() {
-        @Override
-        public int get(int i) {
-            int y = i / width;
-            int x = i % width;
-            if (y >= text.size()) {
-                return ' ';
-            }
-            String line = text.get(y);
-            if (x >= line.length()) {
-                return ' ';
-            }
-            return line.charAt(x);
+public class SerialTerminalBlockEntity extends SerialPeerBlockEntity implements MenuProvider {
+    // Terminal Width = 240
+    // Terminal Height = 180
+    public final static int TERM_WIDTH = 240;
+    public final static int TERM_HEIGHT = 180;
+    public int width;
+    public int height;
+    public int dataSize;
+    public TerminalFont font;
+    public boolean echo = true;
+    public final ArrayList<String> text = new ArrayList<>();
+    private final ContainerData data = new SerialTerminalContainerData(this);
+
+    public void setFont(TerminalFont font) {
+        this.font = font;
+        width = TERM_WIDTH / (font.width + font.hpad);
+        height = TERM_HEIGHT / font.height;
+        dataSize = width * height;
+        // make sure that the term contents fit
+        while (text.size() >= height) {
+            text.remove(0);
         }
-
-        @Override
-        public void set(int i, int j) {
-
-        }
-
-        @Override
-        public int getCount() {
-            return width * height;
-        }
-    };
+    }
+    public void nextFont() {
+        setFont(font.next());
+    }
 
     public SerialTerminalBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(SERIAL_DEVICE_BLOCK_ENTITY.get(), blockPos, blockState);
+        setFont(TerminalFont.TIMES9K);
     }
-
-    public SerialBus getSbus() {
-        return sbus;
-    }
-
     @Override
     protected Component getDefaultName() {
-        return new TextComponent("Serial Device");
+        return new TextComponent("Serial Terminal");
     }
 
     @Override
@@ -68,36 +59,31 @@ public class SerialTerminalBlockEntity extends BaseContainerBlockEntity implemen
         return new SerialTerminalMenu(i, inventory, this, this.data);
     }
 
-    @Override
-    public void attach(SerialBus bus) {
-        sbus = bus;
-    }
-
-    @Override
-    public void detach(SerialBus bus) {
-        sbus = null;
-    }
-
     private void nextLine() {
-        if (text.size() == height) {
+        if (text.size() >= height) {
             text.remove(0); // remove oldest line
         }
         text.add("");
     }
-    private void putChar(char ch) {
-        String last = "";
+    void putChar(char ch) {
         int lines = text.size();
-        if (lines > 0) {
-            last = text.get(lines - 1);
-        } else {
+
+        // Ensure there's at least one line
+        if (lines == 0) {
             text.add("");
             lines = 1;
         }
-        if (last.length() == width) {
+
+        String last = text.get(lines - 1);
+
+        // If the last line is full, move to the next line
+        if (last.length() >= width) {
             nextLine();
-            last = "";
+            lines = text.size();
+            last = text.get(lines - 1); // Get the new last line
         }
-        // this is horrendous
+
+        // Append the character
         last += ch;
         text.set(lines - 1, last);
     }
@@ -109,7 +95,6 @@ public class SerialTerminalBlockEntity extends BaseContainerBlockEntity implemen
         } else {
             putChar(ch);
         }
-        System.out.write(ch);
     }
 
     @Override
@@ -150,5 +135,14 @@ public class SerialTerminalBlockEntity extends BaseContainerBlockEntity implemen
     @Override
     public void clearContent() {
 
+    }
+
+    public void keyPress(char i) {
+        if (echo) {
+            write(i);
+        }
+        if (peer != null) {
+            peer.write(i);
+        }
     }
 }
