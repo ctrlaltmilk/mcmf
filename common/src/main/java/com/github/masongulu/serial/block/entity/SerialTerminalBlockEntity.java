@@ -30,6 +30,16 @@ public class SerialTerminalBlockEntity extends SerialPeerBlockEntity implements 
     public boolean echo = true;
     public final ArrayList<String> text = new ArrayList<>();
     private final ContainerData data = new SerialTerminalContainerData(this);
+    private final ArrayList<Integer> arguments = new ArrayList<>();
+    private String parsedArgument;
+    private boolean isParsingEscapeSequence = false;
+    private ParseState parseState = ParseState.ESCAPE;
+
+    private enum ParseState {
+        ESCAPE,
+        ARGUMENTS,
+        COMMAND
+    }
 
     public void setFont(TerminalFont font) {
         this.font = font;
@@ -88,13 +98,60 @@ public class SerialTerminalBlockEntity extends SerialPeerBlockEntity implements 
         text.set(lines - 1, last);
     }
 
+    private void handleEscapeCode(char command) {
+
+    }
+
+    private boolean parseCharacter(char ch) {
+        switch (parseState) {
+            case ESCAPE -> {
+                if (ch == '[') {
+                    parseState = ParseState.ARGUMENTS;
+                    arguments.clear();
+                    parsedArgument = "";
+                } else {
+                    // not an escape code
+                    isParsingEscapeSequence = false;
+                    return true;
+                }
+            }
+            case ARGUMENTS -> {
+                if (Character.isAlphabetic(ch)) {
+                    if (!parsedArgument.isEmpty()) {
+                        arguments.add(Integer.valueOf(parsedArgument));
+                    }
+                    handleEscapeCode(ch);
+                    isParsingEscapeSequence = false;
+                } else if (Character.isDigit(ch)) {
+                    parsedArgument += ch;
+                } else if (ch == ';') {
+                    // separator
+                    arguments.add(Integer.valueOf(parsedArgument));
+                    parsedArgument = "";
+                } else {
+                    // ???
+                    isParsingEscapeSequence = false;
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     @Override
     public void write(char ch) {
         if (ch == '\n') {
             nextLine();
-        } else {
-            putChar(ch);
+            return;
+        } else if (ch == 27) { // ESC
+            isParsingEscapeSequence = true;
+            parseState = ParseState.ESCAPE;
+            return;
         }
+        if (isParsingEscapeSequence) {
+            if (!parseCharacter(ch)) return;
+        }
+        putChar(ch);
     }
 
     @Override
