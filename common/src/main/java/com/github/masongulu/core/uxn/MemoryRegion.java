@@ -11,9 +11,9 @@ public class MemoryRegion {
         return data;
     }
 
-    public void writeByte(int address, byte d) {
+    public void writeByte(int address, int d) {
         address = checkAddress(address);
-        data[address] = d;
+        data[address] = (byte) d;
     }
 
     public void writeShort(int address, short d) {
@@ -37,7 +37,7 @@ public class MemoryRegion {
 
     public int readShort(int address) {
         address = checkAddress(address);
-        return (readByte(address) << 8) | readByte(address + 1);
+        return (short) ((readByte(address) << 8) | readByte(address + 1));
     }
 
     public int read(boolean isShort, int address) {
@@ -70,6 +70,19 @@ public class MemoryRegion {
             writeByte((address + 1) % 256, (byte)(d & 0xFF));
         } else {
             writeByte(address, (byte)d);
+        }
+    }
+
+    public void fill(int address, int length, int value) {
+        for (int i = 0; i < length; i++) {
+            writeByte(address + i, value);
+        }
+    }
+
+    public void copyTo(MemoryRegion destination, int saddr, int daddr, int length) {
+        for (int i = 0; i < length; i++) {
+            int value = readByte(saddr + i);
+            destination.writeByte(daddr+i, value);
         }
     }
 }

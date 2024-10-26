@@ -8,7 +8,9 @@ public enum TerminalFont {
     COMPUTERCRAFT(8, 11, "textures/gui/term_font.png", -2),
     TIMES9K(5, 9, "textures/gui/times9k_font.png"),
     PICO8(5, 7, "textures/gui/pico8_font.png"),
-    UNIFONT(8, 16, "textures/gui/unifont_font.png");
+    UNIFONT(8, 16, "textures/gui/unifont_font.png"),
+    CGA(8,19,"textures/gui/cga_font.png"),
+    TERMINUS(7,13,"textures/gui/terminus_font.png");
     public final int width;
     public final int height;
     public final int hpad;

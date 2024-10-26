@@ -46,7 +46,7 @@ public class SerialTerminalScreen extends AbstractContainerScreen<SerialTerminal
             minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 0);
         }, minecraft.font, ToggleSwitchType.TOGGLE, ToggleSwitchButton.LabelPosition.RIGHT);
 
-        switchFontButton = new Button(k + 40, l + 195, 30, 20, new TextComponent("Font"), button -> {
+        switchFontButton = new Button(k + 205, l + 192, 30, 17, new TextComponent("Font"), button -> {
             assert minecraft != null;
             assert minecraft.gameMode != null;
             minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 1);
