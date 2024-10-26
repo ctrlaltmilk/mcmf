@@ -37,8 +37,7 @@ public class SerialTerminalBlockEntity extends SerialPeerBlockEntity implements 
 
     private enum ParseState {
         ESCAPE,
-        ARGUMENTS,
-        COMMAND
+        ARGUMENTS
     }
 
     public void setFont(TerminalFont font) {

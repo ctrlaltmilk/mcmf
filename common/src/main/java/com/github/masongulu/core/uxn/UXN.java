@@ -5,11 +5,13 @@ package com.github.masongulu.core.uxn;
 import com.github.masongulu.core.uxn.devices.Device;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class UXN {
     public MemoryRegion memory = new MemoryRegion();
+    private final ArrayList<MemoryRegion> expansion = new ArrayList<>();
     public final Stack rst = new Stack("RST"); // return stack
     public final Stack wst = new Stack("WST"); // working stack
     public int pc;
@@ -32,6 +34,20 @@ public class UXN {
     public UXN(@NotNull UXNBus bus, MemoryRegion memory) {
         this(bus);
         this.memory = memory;
+        // TODO add configurable expansion memory
+        for (int i = 0; i < 16; i++) {
+            expansion.add(new MemoryRegion());
+        }
+    }
+
+    public MemoryRegion getRegion(int id) {
+        if (id == 0) {
+            return memory;
+        }
+        if (id - 1 < expansion.size()) {
+            return expansion.get(id - 1);
+        }
+        return null;
     }
 
     public UXN(@NotNull UXNBus bus) {
@@ -403,7 +419,29 @@ class SystemDevice extends Device {
         switch (port) {
         case 0x00: case 0x01: // Reset vector*
             break;
-        case 0x02: case 0x03: // expansion*
+        case 0x02: // ignore the first byte of expansion*
+            break;
+        case 0x03: // expansion*`
+            int addr = bus.readDev(address - 1) << 8 | bus.readDev(address);
+            int operation = bus.uxn.memory.readByte(addr);
+            int length = bus.uxn.memory.readShort(addr+1);
+            int sbank = bus.uxn.memory.readShort(addr+3);
+            int saddr = bus.uxn.memory.readShort(addr+5);
+            if (operation == 0) {
+                MemoryRegion source = bus.uxn.getRegion(sbank);
+                int value = bus.uxn.memory.readByte(addr+7);
+                source.fill(saddr, length, value);
+            } else if (operation == 1 || operation == 2) {
+                int dbank = bus.uxn.memory.readShort(addr+7);
+                int daddr = bus.uxn.memory.readShort(addr+9);
+                MemoryRegion source = bus.uxn.getRegion(sbank);
+                MemoryRegion destination = bus.uxn.getRegion(dbank);
+                if (operation == 1) {
+                    source.copyTo(destination, saddr, daddr, length);
+                } else {
+                    source.copyToL(destination, saddr, daddr, length);
+                }
+            }
             break;
         case 0x04:
             bus.uxn.wst.setPtr(bus.readDev(address)); break;

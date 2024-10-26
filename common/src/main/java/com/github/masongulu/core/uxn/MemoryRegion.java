@@ -37,7 +37,7 @@ public class MemoryRegion {
 
     public int readShort(int address) {
         address = checkAddress(address);
-        return (short) ((readByte(address) << 8) | readByte(address + 1));
+        return (readByte(address) << 8) | readByte(address + 1);
     }
 
     public int read(boolean isShort, int address) {
@@ -83,6 +83,13 @@ public class MemoryRegion {
         for (int i = 0; i < length; i++) {
             int value = readByte(saddr + i);
             destination.writeByte(daddr+i, value);
+        }
+    }
+
+    public void copyToL(MemoryRegion destination, int saddr, int daddr, int length) {
+        for (int i = length - 1; i >= 0; i--) {
+            int value = readByte(saddr + i);
+            destination.writeByte(daddr + i, value);
         }
     }
 }
