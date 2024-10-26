@@ -2,7 +2,6 @@ package com.github.masongulu.serial.block.entity;
 
 import com.github.masongulu.serial.TerminalFont;
 import com.github.masongulu.serial.screen.SerialTerminalMenu;
-import com.github.masongulu.serial.screen.SerialTerminalScreen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
@@ -17,6 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.ArrayList;
 
 import static com.github.masongulu.ModBlockEntities.SERIAL_DEVICE_BLOCK_ENTITY;
+import static com.github.masongulu.ModBlockEntities.SERIAL_TERMINAL_BLOCK_ENTITY;
 
 public class SerialTerminalBlockEntity extends SerialPeerBlockEntity implements MenuProvider {
     // Terminal Width = 240
@@ -55,7 +55,7 @@ public class SerialTerminalBlockEntity extends SerialPeerBlockEntity implements 
     }
 
     public SerialTerminalBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(SERIAL_DEVICE_BLOCK_ENTITY.get(), blockPos, blockState);
+        super(SERIAL_TERMINAL_BLOCK_ENTITY.get(), blockPos, blockState);
         setFont(TerminalFont.TIMES9K);
     }
     @Override
