@@ -38,6 +38,12 @@ public abstract class GenericDeviceBlock extends BaseEntityBlock {
         return blockState.rotate(mirror.getRotation(blockState.getValue(FACING)));
     }
 
+
+    @Override
+    public RenderShape getRenderShape(BlockState blockState) {
+        return RenderShape.MODEL;
+    }
+
     @Override
     public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
         if (!level.isClientSide()) {

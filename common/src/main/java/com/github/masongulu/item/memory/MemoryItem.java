@@ -14,11 +14,13 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.UUID;
 
+import static com.github.masongulu.ModCreativeTab.MOD_TAB;
+
 public abstract class MemoryItem extends Item {
     private final static String UUID_TAG = "mcmf.uuid";
     private final static String LABEL_TAG = "mcmf.label";
     public MemoryItem() {
-        super(new Properties());
+        super(new Properties().tab(MOD_TAB));
     }
 
     public String getUUID(ItemStack stack) {

@@ -16,6 +16,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
 import static com.github.masongulu.ComputerMod.MOD_ID;
+import static com.github.masongulu.ModCreativeTab.MOD_TAB;
 
 public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(MOD_ID, Registry.BLOCK_REGISTRY);
@@ -48,19 +49,25 @@ public class ModBlocks {
         SERIAL_CABLE = tag("serial_cable");
 
         COMPUTER_BLOCK = BLOCKS.register("computer", ComputerBlock::new);
-        COMPUTER_ITEM = BLOCK_ITEMS.register("computer", () -> new BlockItem(COMPUTER_BLOCK.get(), new Item.Properties()));
+        COMPUTER_ITEM = BLOCK_ITEMS.register("computer", () -> new BlockItem(COMPUTER_BLOCK.get(),
+                new Item.Properties().tab(MOD_TAB)));
 
         SERIAL_DEVICE_BLOCK = BLOCKS.register("serial_device", SerialDeviceBlock::new);
-        SERIAL_DEVICE_ITEM = BLOCK_ITEMS.register("serial_device", () -> new BlockItem(SERIAL_DEVICE_BLOCK.get(), new Item.Properties()));
+        SERIAL_DEVICE_ITEM = BLOCK_ITEMS.register("serial_device", () -> new BlockItem(SERIAL_DEVICE_BLOCK.get(),
+                new Item.Properties().tab(MOD_TAB)));
         SERIAL_CABLE_BLOCK = BLOCKS.register("serial_cable", SerialCableBlock::new);
-        SERIAL_CABLE_ITEM = BLOCK_ITEMS.register("serial_cable", () -> new BlockItem(SERIAL_CABLE_BLOCK.get(), new Item.Properties()));
+        SERIAL_CABLE_ITEM = BLOCK_ITEMS.register("serial_cable", () -> new BlockItem(SERIAL_CABLE_BLOCK.get(),
+                new Item.Properties().tab(MOD_TAB)));
         SERIAL_TERMINAL_BLOCK = BLOCKS.register("serial_terminal", SerialTerminalBlock::new);
-        SERIAL_TERMINAL_ITEM = BLOCK_ITEMS.register("serial_terminal", () -> new BlockItem(SERIAL_TERMINAL_BLOCK.get(), new Item.Properties()));
+        SERIAL_TERMINAL_ITEM = BLOCK_ITEMS.register("serial_terminal", () -> new BlockItem(SERIAL_TERMINAL_BLOCK.get(),
+                new Item.Properties().tab(MOD_TAB)));
 
         CABLE_BLOCK = BLOCKS.register("cable", CableBlock::new);
-        CABLE_ITEM = BLOCK_ITEMS.register("cable", () -> new BlockItem(CABLE_BLOCK.get(), new Item.Properties()));
+        CABLE_ITEM = BLOCK_ITEMS.register("cable", () -> new BlockItem(CABLE_BLOCK.get(),
+                new Item.Properties().tab(MOD_TAB)));
         REDSTONE_DEVICE_BLOCK = BLOCKS.register("redstone_device", RedstoneDeviceBlock::new);
-        REDSTONE_DEVICE_ITEM = BLOCK_ITEMS.register("redstone_device", () -> new BlockItem(REDSTONE_DEVICE_BLOCK.get(), new Item.Properties()));
+        REDSTONE_DEVICE_ITEM = BLOCK_ITEMS.register("redstone_device", () -> new BlockItem(REDSTONE_DEVICE_BLOCK.get(),
+                new Item.Properties().tab(MOD_TAB)));
 
         BLOCKS.register();
         BLOCK_ITEMS.register();

@@ -1,11 +1,16 @@
 package com.github.masongulu.serial.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+
+import static com.github.masongulu.computer.block.CableBlock.BOTTOM_SLAB;
 
 public class SerialCableBlock extends Block {
     public SerialCableBlock() {
@@ -13,8 +18,8 @@ public class SerialCableBlock extends Block {
     }
 
     @Override
-    public RenderShape getRenderShape(BlockState blockState) {
-        return RenderShape.MODEL;
+    public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
+        return BOTTOM_SLAB;
     }
 
     @Override

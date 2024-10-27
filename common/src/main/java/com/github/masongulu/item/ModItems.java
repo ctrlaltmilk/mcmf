@@ -12,7 +12,6 @@ import static com.github.masongulu.ComputerMod.MOD_ID;
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(MOD_ID, Registry.ITEM_REGISTRY);
 
-
     public static RegistrySupplier<Item> SROM_ITEM;
     public static RegistrySupplier<Item> RAM_ITEM;
 

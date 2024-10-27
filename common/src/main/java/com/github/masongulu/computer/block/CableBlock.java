@@ -1,21 +1,25 @@
 package com.github.masongulu.computer.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class CableBlock extends Block {
+    public static final VoxelShape BOTTOM_SLAB = Block.box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0);
     public CableBlock() {
         super(Properties.of(Material.STONE));
     }
 
     @Override
-    public RenderShape getRenderShape(BlockState blockState) {
-        return RenderShape.MODEL;
+    public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
+        return BOTTOM_SLAB;
     }
 
     @Override

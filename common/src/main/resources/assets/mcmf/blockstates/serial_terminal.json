@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "mcmf:block/serial_terminal",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "mcmf:block/serial_terminal"
+    },
+    "facing=south": {
+      "model": "mcmf:block/serial_terminal",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "mcmf:block/serial_terminal",
+      "y": 270
+    }
+  }
+}
