@@ -18,7 +18,6 @@ import static com.github.masongulu.ModBlockEntities.REDSTONE_DEVICE_BLOCK_ENTITY
 
 public class RedstoneDeviceBlockEntity extends GenericDeviceBlockEntity implements IDevice {
     private UXNBus bus;
-    private int deviceNumber = 9;
     public final Map<Direction,Integer> redstoneOutputs = new HashMap<>();
     public Map<Direction,Integer> redstoneInputs = new HashMap<>();
 
@@ -29,6 +28,7 @@ public class RedstoneDeviceBlockEntity extends GenericDeviceBlockEntity implemen
         for (Direction direction : Direction.values()) {
             redstoneOutputs.put(direction, 0);
         }
+        deviceNumber = 9;
     }
 
     private void tick(Level level, BlockPos pos, BlockState state) {

@@ -16,10 +16,10 @@ import static com.github.masongulu.ModBlockEntities.SERIAL_DEVICE_BLOCK_ENTITY;
 public class SerialDeviceBlockEntity extends GenericDeviceBlockEntity implements IDevice, ISerialPeer {
     private ISerialPeer peer;
     private UXNBus bus;
-    protected int deviceNumber = 1;
     private boolean conflicting = false;
     public SerialDeviceBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(SERIAL_DEVICE_BLOCK_ENTITY.get(), blockPos, blockState);
+        deviceNumber = 1;
     }
 
     @Override

@@ -14,16 +14,9 @@ public class GenericDeviceMenu extends AbstractContainerMenu {
     public GenericDeviceBlockEntity blockEntity;
     public ContainerData data;
 
-    private String getString(int o) {
-        StringBuilder s = new StringBuilder();
-        for (int i = 0; i < ComputerBlockEntity.STRING_LENGTH; i++) {
-            s.append((char)data.get(o + i));
-        }
-        return s.toString();
-    }
     public GenericDeviceMenu(int i, Inventory inventory) {
-        this(i, inventory, null, new SimpleContainerData(ComputerBlockEntity.DATA_LENGTH),
-                new SimpleContainer(ComputerBlockEntity.CONTAINER_SIZE));
+        this(i, inventory, null, new SimpleContainerData(1),
+                new SimpleContainer(1));
     }
 
     public GenericDeviceMenu(int i, Inventory inventory, GenericDeviceBlockEntity bentity, ContainerData data, Container container) {

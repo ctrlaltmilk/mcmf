@@ -1,9 +1,12 @@
 # Important
-* Dev textures for serial terminal, serial cable, serial device
+* Device # selection UI
+  * Save / load device # from NBT data
 * UXN expansion memory slots
 * Argument parsing (from serial i/o events)
 * Drop memory when broken
-* Serial terminal escape code support
+* Serial Terminal
+  * Escape code support
+  * Save state to NBT data
 * Serial device sided-ness
 * Actually implement device sided-ness
 

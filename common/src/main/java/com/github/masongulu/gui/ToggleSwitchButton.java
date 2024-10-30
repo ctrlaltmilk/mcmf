@@ -7,8 +7,6 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 
-import java.awt.*;
-
 import static com.github.masongulu.ComputerMod.MOD_ID;
 
 public class ToggleSwitchButton extends Button {
@@ -19,7 +17,7 @@ public class ToggleSwitchButton extends Button {
     private Font font;
     private LabelPosition labelPosition;
     public ToggleSwitchButton(int x, int y, String label, OnPress onPress, Font font, ToggleSwitchType type, LabelPosition position) {
-        super(x - type.switchHW, y - type.switchHH, type.switchW, type.switchW, new TextComponent(label), onPress);
+        super(x - type.hw, y - type.hh, type.w, type.w, new TextComponent(label), onPress);
         this.type = type;
         this.label = label;
         this.font = font;
@@ -33,20 +31,34 @@ public class ToggleSwitchButton extends Button {
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, texture);
 
-        int ty = state ? type.switchOnTY : type.switchOffTY;
-        this.blit(poseStack, x, y, type.switchTX, ty, type.switchW, type.switchH);
+        int ty = state ? type.onTy : type.offTy;
+        this.blit(poseStack, x, y, type.tx, ty, type.w, type.h);
+    }
+
+    public void render(PoseStack poseStack, int i, int j, float f, boolean offset) {
+        switch (labelPosition) {
+            case ABOVE -> drawCenteredString(poseStack, font, label, x + type.hw, y - type.hh + 2, 16777215);
+            case RIGHT -> drawString(poseStack, font, label, x + type.w, y + type.hh / 2, 16777215);
+            case ON -> {
+                int sx = x + type.hw;
+                int sy = y + type.hh / 2;
+                if (offset) {
+                    sx += 1;
+                    sy += 1;
+                }
+                drawCenteredString(poseStack, font, label, sx, sy, 16777215);
+            }
+        }
     }
 
     @Override
-    public void render(PoseStack poseStack, int i, int j, float f) {
-        switch (labelPosition) {
-            case ABOVE -> drawCenteredString(poseStack, font, label, x + type.switchHW, y - type.switchHH + 2, 16777215);
-            case RIGHT -> drawString(poseStack, font, label, x + type.switchW, y + type.switchHH / 2, 16777215);
-        }
+    public void render(PoseStack stack, int i, int j, float f) {
+        render(stack, i, j, f, false);
     }
 
     public enum LabelPosition {
         ABOVE,
-        RIGHT;
+        RIGHT,
+        ON;
     }
 }
