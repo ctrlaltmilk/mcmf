@@ -1,5 +1,8 @@
 package com.github.masongulu.serial;
 
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.resources.ResourceLocation;
 
 import static com.github.masongulu.ComputerMod.MOD_ID;
@@ -28,6 +31,24 @@ public enum TerminalFont {
         this(width, height, path, 0);
     }
 
+    public void render(Screen screen, PoseStack poseStack, int x, int y, int ch) {
+        int charX = ch % 16;
+        int charY = ch / 16;
+        int charFromX = charX * this.width;
+        int charFromY = charY * this.height;
+        screen.blit(poseStack, x, y, charFromX, charFromY, this.width, this.height);
+    }
+    public void renderCursor(Screen screen, PoseStack poseStack, int sx, int sy, int cx, int cy) {
+        int cpx = cx * (this.width + this.hpad);
+        int cpy = cy * this.height;
+        render(screen, poseStack, sx + cpx - this.width / 2, sy + cpy, '|');
+    }
+
+    public void render(Screen screen, PoseStack poseStack, int sx, int sy, int cx, int cy, int ch) {
+        int cpx = cx * (this.width + this.hpad);
+        int cpy = cy * this.height;
+        render(screen, poseStack, sx + cpx, sy + cpy, ch);
+    }
 
     public static final TerminalFont[] vals = values();
 

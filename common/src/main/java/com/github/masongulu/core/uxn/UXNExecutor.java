@@ -20,7 +20,7 @@ public class UXNExecutor extends Thread {
 
     public void tick() {
         for (UXN uxn : UXNs) {
-            uxn.runLimited(100);
+            uxn.runLimited(1024);
         }
     }
 

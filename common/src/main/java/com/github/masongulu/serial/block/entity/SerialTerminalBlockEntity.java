@@ -2,6 +2,7 @@ package com.github.masongulu.serial.block.entity;
 
 import com.github.masongulu.serial.TerminalFont;
 import com.github.masongulu.serial.screen.SerialTerminalMenu;
+import com.github.masongulu.serial.screen.TerminalBuffer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
@@ -28,27 +29,15 @@ public class SerialTerminalBlockEntity extends SerialPeerBlockEntity implements 
     public int dataSize;
     public TerminalFont font;
     public boolean echo = true;
-    public final ArrayList<String> text = new ArrayList<>();
     private final ContainerData data = new SerialTerminalContainerData(this);
-    private final ArrayList<Integer> arguments = new ArrayList<>();
-    private String parsedArgument;
-    private boolean isParsingEscapeSequence = false;
-    private ParseState parseState = ParseState.ESCAPE;
-
-    private enum ParseState {
-        ESCAPE,
-        ARGUMENTS
-    }
+    public TerminalBuffer buffer = new TerminalBuffer();
 
     public void setFont(TerminalFont font) {
         this.font = font;
         width = TERM_WIDTH / (font.width + font.hpad);
         height = TERM_HEIGHT / font.height;
         dataSize = width * height;
-        // make sure that the term contents fit
-        while (text.size() >= height) {
-            text.remove(0);
-        }
+        buffer.setResolution(width, height);
     }
     public void nextFont() {
         setFont(font.next());
@@ -68,89 +57,13 @@ public class SerialTerminalBlockEntity extends SerialPeerBlockEntity implements 
         return new SerialTerminalMenu(i, inventory, this, this.data);
     }
 
-    private void nextLine() {
-        if (text.size() >= height) {
-            text.remove(0); // remove oldest line
-        }
-        text.add("");
-    }
-    void putChar(char ch) {
-        int lines = text.size();
-
-        // Ensure there's at least one line
-        if (lines == 0) {
-            text.add("");
-            lines = 1;
-        }
-
-        String last = text.get(lines - 1);
-
-        // If the last line is full, move to the next line
-        if (last.length() >= width) {
-            nextLine();
-            lines = text.size();
-            last = text.get(lines - 1); // Get the new last line
-        }
-
-        // Append the character
-        last += ch;
-        text.set(lines - 1, last);
-    }
-
-    private void handleEscapeCode(char command) {
-
-    }
-
-    private boolean parseCharacter(char ch) {
-        switch (parseState) {
-            case ESCAPE -> {
-                if (ch == '[') {
-                    parseState = ParseState.ARGUMENTS;
-                    arguments.clear();
-                    parsedArgument = "";
-                } else {
-                    // not an escape code
-                    isParsingEscapeSequence = false;
-                    return true;
-                }
-            }
-            case ARGUMENTS -> {
-                if (Character.isAlphabetic(ch)) {
-                    if (!parsedArgument.isEmpty()) {
-                        arguments.add(Integer.valueOf(parsedArgument));
-                    }
-                    handleEscapeCode(ch);
-                    isParsingEscapeSequence = false;
-                } else if (Character.isDigit(ch)) {
-                    parsedArgument += ch;
-                } else if (ch == ';') {
-                    // separator
-                    arguments.add(Integer.valueOf(parsedArgument));
-                    parsedArgument = "";
-                } else {
-                    // ???
-                    isParsingEscapeSequence = false;
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
 
     @Override
     public void write(char ch) {
-        if (ch == '\n') {
-            nextLine();
-            return;
-        } else if (ch == 27) { // ESC
-            isParsingEscapeSequence = true;
-            parseState = ParseState.ESCAPE;
-            return;
+        if (ch == 0x07) {
+            // TODO bell
         }
-        if (isParsingEscapeSequence) {
-            if (!parseCharacter(ch)) return;
-        }
-        putChar(ch);
+        buffer.write(ch);
     }
 
     @Override

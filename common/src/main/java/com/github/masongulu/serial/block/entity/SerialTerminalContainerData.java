@@ -8,7 +8,9 @@ public class SerialTerminalContainerData implements ContainerData {
     public static final int WIDTH_INDEX = 1;
     public static final int HEIGHT_INDEX = 2;
     public static final int FONT_INDEX = 3;
-    public static final int DATA_SIZE = 4;
+    public static final int CURSOR_X_INDEX = 4;
+    public static final int CURSOR_Y_INDEX = 5;
+    public static final int DATA_SIZE = 6;
 
     public static final int MAX_SIZE = 2048;
 
@@ -28,18 +30,13 @@ public class SerialTerminalContainerData implements ContainerData {
             return height;
         } else if (i == FONT_INDEX) {
             return entity.font.ordinal();
+        } else if (i == CURSOR_X_INDEX) {
+            return entity.buffer.getX();
+        } else if (i == CURSOR_Y_INDEX) {
+            return entity.buffer.getY();
         }
         i -= DATA_SIZE;
-        int y = i / width;
-        int x = i % width;
-        if (y >= entity.text.size()) {
-            return ' ';
-        }
-        String line = entity.text.get(y);
-        if (x >= line.length()) {
-            return ' ';
-        }
-        return line.charAt(x);
+        return entity.buffer.getChar(i);
     }
 
     @Override

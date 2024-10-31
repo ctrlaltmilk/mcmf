@@ -63,8 +63,12 @@ public class SerialTerminalMenu extends AbstractContainerMenu {
             // change font
             blockEntity.nextFont();
             return true;
+        } else if (i == 2) {
+            // reset display
+            blockEntity.buffer.reset();
+            return true;
         }
-        blockEntity.keyPress((char) (i - 2));
+        blockEntity.keyPress((char) (i - 3));
         return true;
     }
 }
