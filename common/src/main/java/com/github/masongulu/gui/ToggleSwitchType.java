@@ -2,7 +2,7 @@ package com.github.masongulu.gui;
 
 public enum ToggleSwitchType {
     TOGGLE(0,21,0,17, 21),
-    ROCKER(17, 0, 21, 17, 21),
+    ROCKER(17, 21, 0, 17, 21),
     PIANO(0, 46, 68, 21, 22, -1, -2);
     public final int tx;
     public final int h;

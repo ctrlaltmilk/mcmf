@@ -13,7 +13,8 @@ public enum TerminalFont {
     PICO8(5, 7, "pico8_font.png"),
     UNIFONT(8, 16, "unifont_font.png"),
     CGA(8,19,"cga_font.png"),
-    TERMINUS(7,13,"terminus_font.png");
+    TERMINUS(7,13,"terminus_font.png"),
+    SEG7(7, 11, "7seg_font.png");
     public final int width;
     public final int height;
     public final int hpad;
@@ -48,6 +49,11 @@ public enum TerminalFont {
         int cpx = cx * (this.width + this.hpad);
         int cpy = cy * this.height;
         render(screen, poseStack, sx + cpx, sy + cpy, ch);
+    }
+    public void renderString(Screen screen, PoseStack poseStack, int sx, int sy, String s) {
+        for (int i = 0; i < s.length(); i++) {
+            render(screen, poseStack, sx, sy, i, 0, s.charAt(i));
+        }
     }
 
     public static final TerminalFont[] vals = values();
