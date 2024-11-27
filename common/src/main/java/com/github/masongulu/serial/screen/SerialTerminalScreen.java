@@ -127,7 +127,7 @@ public class SerialTerminalScreen extends AbstractContainerScreen<SerialTerminal
         int sheight = termMenu.data.get(SerialTerminalContainerData.HEIGHT_INDEX);
         int fontIndex = termMenu.data.get(SerialTerminalContainerData.FONT_INDEX);
         TerminalFont font = TerminalFont.vals[fontIndex];
-        RenderSystem.setShaderTexture(0, font.texture); // TODO figure out where else to put this
+        RenderSystem.setShaderTexture(0, font.texture);
         for (int c = 0; c < swidth * sheight; c++ ) {
             int cx = c % swidth;
             int cy = c / swidth;

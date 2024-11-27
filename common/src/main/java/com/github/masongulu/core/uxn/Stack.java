@@ -1,5 +1,7 @@
 package com.github.masongulu.core.uxn;
 
+import java.util.ArrayList;
+
 public class Stack {
     public static final int STACK_SIZE = 256;
     private final byte[] data;
@@ -20,8 +22,17 @@ public class Stack {
             sb.append(String.format("%02x", data[wrap(x)]));
             sb.append(x == 255 ? "|" : " "); // show the bottom of the stack
         }
-        sb.append("<");
+        sb.append('<');
         return sb.toString();
+    }
+
+    public ArrayList<Integer> getTopValues() {
+        ArrayList<Integer> topValues = new ArrayList<>();
+        for (int i = wrap(top - 7); i != wrap(top + 1); i = wrap(i + 1)) {
+            int x = wrap(i);
+            topValues.add((int) data[x]);
+        }
+        return topValues;
     }
 
     public void pushByte(byte value) {

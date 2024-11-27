@@ -2,6 +2,7 @@ package com.github.masongulu.computer.screen;
 
 import com.github.masongulu.gui.ToggleSwitchButton;
 import com.github.masongulu.gui.ToggleSwitchType;
+import com.github.masongulu.serial.TerminalFont;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -22,6 +23,7 @@ public class ComputerScreen extends AbstractContainerScreen<ComputerMenu> {
     private final int pauseSwitchX = 60;
     private final int stepButtonX = 90;
     private final int switchY = 102;
+    private final TerminalFont segFont = TerminalFont.SEG7;
 
     public ComputerScreen(ComputerMenu abstractContainerMenu, Inventory inventory, Component component) {
         super(abstractContainerMenu, inventory, component);
@@ -36,11 +38,11 @@ public class ComputerScreen extends AbstractContainerScreen<ComputerMenu> {
         int k = this.leftPos;
         int l = this.topPos;
         assert minecraft != null;
-        powerButton = new ToggleSwitchButton(k + powerSwitchX, l + switchY, "Power", button -> {
+        powerButton = new ToggleSwitchButton(k + powerSwitchX, l + switchY - 5, "", button -> {
             assert minecraft != null;
             assert minecraft.gameMode != null;
             minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 0);
-        }, minecraft.font, ToggleSwitchType.TOGGLE);
+        }, minecraft.font, ToggleSwitchType.ROCKER);
         pauseButton = new ToggleSwitchButton(k + pauseSwitchX, l + switchY, "Pause", button -> {
             assert minecraft != null;
             assert minecraft.gameMode != null;
@@ -69,6 +71,17 @@ public class ComputerScreen extends AbstractContainerScreen<ComputerMenu> {
         powerButton.renderBg(poseStack, k, l, computerMenu.isRunning());
         pauseButton.renderBg(poseStack, k, l, computerMenu.isPaused());
         stepButton.renderBg(poseStack, k, l, false);
+
+//        RenderSystem.setShaderTexture(0, segFont.texture);
+//        String wst = computerMenu.getWst();
+//        String rst = computerMenu.getRst();
+//        for (int g = 0; g < 8; g ++) {
+//            int idx = 4 + g * 3;
+//            int sx = k + 32
+//                    + (g * (segFont.width * 2 + 3));
+//            segFont.renderString(this, poseStack, sx, l + 43, wst.substring(idx, idx+2));
+//            segFont.renderString(this, poseStack, sx, l + 61, rst.substring(idx, idx+2));
+//        }
     }
 
     @Override
@@ -83,6 +96,8 @@ public class ComputerScreen extends AbstractContainerScreen<ComputerMenu> {
         stepButton.render(poseStack, i, j, f);
         drawString(poseStack, minecraft.font, computerMenu.getWst(), x + 8, y + 43, 16777215);
         drawString(poseStack, minecraft.font, computerMenu.getRst(), x + 8, y + 61, 16777215);
+//        drawString(poseStack, minecraft.font, "WST", x + 8, y + 44, 16777215);
+//        drawString(poseStack, minecraft.font, "RST", x + 8, y + 62, 16777215);
         drawString(poseStack, minecraft.font, String.format("Vectors %d", computerMenu.getVectors()),
                 x + 69, y + 25, 16777215);
         drawString(poseStack, minecraft.font, String.format("PC %04x", computerMenu.getPc()),
