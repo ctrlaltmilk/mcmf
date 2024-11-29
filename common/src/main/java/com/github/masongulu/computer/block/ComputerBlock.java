@@ -4,6 +4,7 @@ import com.github.masongulu.ModBlockEntities;
 import com.github.masongulu.computer.block.entity.ComputerBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
@@ -71,8 +72,9 @@ public class ComputerBlock extends BaseEntityBlock {
     public void onRemove(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl) {
         if (!level.isClientSide()) {
             BlockEntity blockEntity = level.getBlockEntity(blockPos);
-            if (blockEntity instanceof ComputerBlockEntity) {
-                ((ComputerBlockEntity) blockEntity).shutdown();
+            if (blockEntity instanceof ComputerBlockEntity cBlockEntity) {
+                cBlockEntity.shutdown();
+                Containers.dropContents(level, blockPos, cBlockEntity);
             }
         }
         super.onRemove(blockState, level, blockPos, blockState2, bl);
