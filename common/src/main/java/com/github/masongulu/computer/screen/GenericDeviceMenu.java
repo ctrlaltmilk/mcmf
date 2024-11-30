@@ -49,6 +49,7 @@ public class GenericDeviceMenu extends AbstractContainerMenu {
 
     @Override
     public boolean clickMenuButton(Player player, int i) {
+        setData(0, i);
         return true;
     }
 }

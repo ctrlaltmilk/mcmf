@@ -1,8 +1,12 @@
 package com.github.masongulu.computer.block.entity;
 
 import com.github.masongulu.computer.screen.GenericDeviceMenu;
+import com.github.masongulu.core.uxn.UXNBus;
+import com.github.masongulu.core.uxn.devices.IDevice;
 import com.github.masongulu.core.uxn.devices.IDeviceProvider;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -14,8 +18,9 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class GenericDeviceBlockEntity extends BaseContainerBlockEntity implements MenuProvider, IDeviceProvider {
+public abstract class GenericDeviceBlockEntity extends BaseContainerBlockEntity implements MenuProvider, IDeviceProvider, IDevice {
     public int deviceNumber;
+    protected UXNBus bus;
     private final ContainerData data = new ContainerData() {
         @Override
         public int get(int i) {
@@ -34,10 +39,6 @@ public abstract class GenericDeviceBlockEntity extends BaseContainerBlockEntity 
     };
     protected GenericDeviceBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
         super(blockEntityType, blockPos, blockState);
-    }
-
-    public void setDeviceNumber(int i) {
-        this.deviceNumber = i;
     }
 
     @Override
@@ -73,6 +74,30 @@ public abstract class GenericDeviceBlockEntity extends BaseContainerBlockEntity 
     @Override
     public void setItem(int i, ItemStack itemStack) {
 
+    }
+
+
+    @Override
+    public void attach(UXNBus manager) {
+        bus = manager;
+        manager.setDevice(deviceNumber, this);
+    }
+
+    @Override
+    public void detach(UXNBus bus) {
+        bus.deleteDevice(deviceNumber);
+        this.bus = null;
+    }
+
+    public void setDeviceNumber(int i) {
+        UXNBus bus = this.bus;
+        if (bus != null) {
+            detach(bus);
+        }
+        deviceNumber = i;
+        if (bus != null) {
+            attach(bus);
+        }
     }
 
     @Override

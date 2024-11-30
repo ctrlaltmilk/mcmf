@@ -40,7 +40,7 @@ public class GenericDeviceScreen extends AbstractContainerScreen<GenericDeviceMe
             int y = l + 26 + bHeight * iy;
             deviceSelectors[i] = new ToggleSwitchButton(x, y, String.format("%d", i), button -> {
                 assert minecraft.gameMode != null;
-                menu.setData(0, finalI);
+                minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, finalI);
             }, minecraft.font, PIANO, ToggleSwitchButton.LabelPosition.ON);
             addWidget(deviceSelectors[i]);
         }

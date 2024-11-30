@@ -5,8 +5,8 @@
   * Save / load device # from NBT data
 * ~~UXN expansion memory slots~~
   * Put these slots in the UI
-* Drop memory when broken
 * Remove computers from execution when unloaded
+* Item to inspect the state of the buses
 
 # Less Important
 * Argument parsing (from serial i/o events)

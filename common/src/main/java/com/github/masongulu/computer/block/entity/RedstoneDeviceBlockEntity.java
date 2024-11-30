@@ -17,7 +17,6 @@ import java.util.Map;
 import static com.github.masongulu.ModBlockEntities.REDSTONE_DEVICE_BLOCK_ENTITY;
 
 public class RedstoneDeviceBlockEntity extends GenericDeviceBlockEntity implements IDevice {
-    private UXNBus bus;
     public final Map<Direction,Integer> redstoneOutputs = new HashMap<>();
     public Map<Direction,Integer> redstoneInputs = new HashMap<>();
 
@@ -47,18 +46,6 @@ public class RedstoneDeviceBlockEntity extends GenericDeviceBlockEntity implemen
         if (bus.uxn == null) return;
         redstoneInputs = redstone;
         bus.uxn.queueEvent(new RedstoneEvent(deviceNumber));
-    }
-
-    @Override
-    public void attach(UXNBus manager) {
-        bus = manager;
-        manager.setDevice(deviceNumber, this);
-    }
-
-    @Override
-    public void detach(UXNBus bus) {
-        bus.deleteDevice(deviceNumber);
-        this.bus = null;
     }
 
     @Override

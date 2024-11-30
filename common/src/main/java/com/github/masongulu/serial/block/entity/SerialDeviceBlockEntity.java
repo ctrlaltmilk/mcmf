@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import static com.github.masongulu.ModBlockEntities.SERIAL_DEVICE_BLOCK_ENTITY;
 
-public class SerialDeviceBlockEntity extends GenericDeviceBlockEntity implements IDevice, ISerialPeer {
+public class SerialDeviceBlockEntity extends GenericDeviceBlockEntity implements ISerialPeer {
     private ISerialPeer peer;
     private UXNBus bus;
     private boolean conflicting = false;
