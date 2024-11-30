@@ -18,11 +18,10 @@ import static com.github.masongulu.ModBlockEntities.FLASHER_DEVICE_BLOCK_ENTITY;
 import static com.github.masongulu.ModBlockEntities.REDSTONE_DEVICE_BLOCK_ENTITY;
 
 public class FlasherDeviceBlockEntity extends GenericDeviceBlockEntity {
-    private UXNBus bus;
 
     public FlasherDeviceBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(FLASHER_DEVICE_BLOCK_ENTITY.get(), blockPos, blockState);
-        deviceNumber = 9;
+        deviceNumber = 13;
     }
 
     private void tick(Level level, BlockPos pos, BlockState state) {
@@ -44,6 +43,11 @@ public class FlasherDeviceBlockEntity extends GenericDeviceBlockEntity {
         int port = address & 0x0F;
         switch(port) {
         }
+    }
+
+    @Override
+    public String getLabel() {
+        return "Flasher Device";
     }
 
     @Override

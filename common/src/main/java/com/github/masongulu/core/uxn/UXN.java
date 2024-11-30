@@ -487,4 +487,9 @@ class SystemDevice extends Device {
             break;
         }
     }
+
+    @Override
+    public String getLabel() {
+        return "System";
+    }
 }

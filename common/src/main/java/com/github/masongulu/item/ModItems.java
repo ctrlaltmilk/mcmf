@@ -14,10 +14,12 @@ public class ModItems {
 
     public static RegistrySupplier<Item> SROM_ITEM;
     public static RegistrySupplier<Item> RAM_ITEM;
+    public static RegistrySupplier<Item> NETWORK_DEBUG_ITEM;
 
     public static void register() {
         SROM_ITEM = ITEMS.register("srom", SROMItem::new);
         RAM_ITEM = ITEMS.register("ram", RAMItem::new);
+        NETWORK_DEBUG_ITEM = ITEMS.register("network_debug_stick", NetworkDebugItem::new);
         ITEMS.register();
     }
 }

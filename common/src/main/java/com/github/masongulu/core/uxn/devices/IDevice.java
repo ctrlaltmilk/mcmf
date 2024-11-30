@@ -7,4 +7,5 @@ public interface IDevice {
     void read(int address);
     void attach(UXNBus bus);
     void detach(UXNBus bus);
+    String getLabel();
 }

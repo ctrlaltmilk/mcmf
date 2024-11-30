@@ -67,6 +67,11 @@ public class SerialDeviceBlockEntity extends GenericDeviceBlockEntity implements
     }
 
     @Override
+    public String getLabel() {
+        return "Serial Adapter";
+    }
+
+    @Override
     public void attach(ISerialPeer bus) {
         peer = bus;
     }

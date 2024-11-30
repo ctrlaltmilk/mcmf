@@ -36,4 +36,9 @@ public class CalendarDev extends Device{
         };
         bus.writeDev(address,write);
     }
+
+    @Override
+    public String getLabel() {
+        return "Calendar";
+    }
 }

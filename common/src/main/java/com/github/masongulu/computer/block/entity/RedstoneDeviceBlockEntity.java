@@ -105,6 +105,11 @@ public class RedstoneDeviceBlockEntity extends GenericDeviceBlockEntity implemen
     }
 
     @Override
+    public String getLabel() {
+        return "Redstone Device";
+    }
+
+    @Override
     public IDevice getDevice(Direction attachSide) {
         return this;
     }

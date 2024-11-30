@@ -26,7 +26,7 @@ public class FlasherDeviceBlock extends GenericDeviceBlock {
     }
 
     public BlockEntity newBlockEntity(BlockPos arg, BlockState arg2) {
-        return new RedstoneDeviceBlockEntity(arg, arg2);
+        return new FlasherDeviceBlockEntity(arg, arg2);
     }
 
     @Override

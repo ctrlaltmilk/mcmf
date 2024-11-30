@@ -5,6 +5,7 @@ import com.github.masongulu.core.uxn.UXNBus;
 import com.github.masongulu.core.uxn.devices.IDevice;
 import com.github.masongulu.core.uxn.devices.IDeviceProvider;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.MenuProvider;
@@ -18,8 +19,26 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.UUID;
+
 public abstract class GenericDeviceBlockEntity extends BaseContainerBlockEntity implements MenuProvider, IDeviceProvider, IDevice {
     public int deviceNumber;
+    private final static String DEVICE_NUMBER_TAG = "mcmf.device_number";
+
+    @Override
+    protected void saveAdditional(CompoundTag compoundTag) {
+        super.saveAdditional(compoundTag);
+        compoundTag.putByte(DEVICE_NUMBER_TAG, (byte)deviceNumber);
+    }
+
+    @Override
+    public void load(CompoundTag compoundTag) {
+        super.load(compoundTag);
+        if (compoundTag.contains(DEVICE_NUMBER_TAG)) {
+            deviceNumber = compoundTag.getByte(DEVICE_NUMBER_TAG);
+        }
+    }
+
     protected UXNBus bus;
     private final ContainerData data = new ContainerData() {
         @Override

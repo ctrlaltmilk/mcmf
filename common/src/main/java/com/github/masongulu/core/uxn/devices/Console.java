@@ -54,6 +54,11 @@ public class Console extends Device {
     public void read(int address) {
         //all values should be set when the KeyEvent happens
     }
+
+    @Override
+    public String getLabel() {
+        return "Java Console";
+    }
 }
 
 class KeyEvent implements UXNEvent {

@@ -143,4 +143,9 @@ public class FileDev extends Device {
     public void read(int address) {
         //useless as `write` does all the memory writing stuffs
     }
+
+    @Override
+    public String getLabel() {
+        return "Java File I/O";
+    }
 }

@@ -231,6 +231,18 @@ public class UXNBus {
         }
         return uxn.getEventCount();
     }
+
+    public String dumpStatus() {
+        StringBuilder s = new StringBuilder();
+        s.append(String.format("Paused: %s\nExecuting: %s\nDevices:\n", isPaused(), isExecuting()));
+        for (int i = 0; i < 16; i++) {
+            IDevice d = devices[i];
+            if (d != null) {
+                s.append(String.format("[%X0] %s\n", i, d.getLabel()));
+            }
+        }
+        return s.toString();
+    }
 }
 
 class BootEvent implements UXNEvent {

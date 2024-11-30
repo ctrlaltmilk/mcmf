@@ -1,12 +1,10 @@
 # Important
 * Custom command for spawning in sroms
   * Drag+drop upload flasher
-* ~~Device # selection UI~~ Make it actually work now...
-  * Save / load device # from NBT data
 * ~~UXN expansion memory slots~~
   * Put these slots in the UI
 * Remove computers from execution when unloaded
-* Item to inspect the state of the buses
+* UXN serial /type support
 
 # Less Important
 * Argument parsing (from serial i/o events)
