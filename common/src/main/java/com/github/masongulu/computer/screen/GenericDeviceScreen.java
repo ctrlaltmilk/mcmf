@@ -1,5 +1,6 @@
 package com.github.masongulu.computer.screen;
 
+import com.github.masongulu.gui.DevicePianoButtons;
 import com.github.masongulu.gui.PianoButtonGroup;
 import com.github.masongulu.gui.ToggleSwitchButton;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -10,18 +11,20 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.animal.Panda;
 import net.minecraft.world.entity.player.Inventory;
+import org.jetbrains.annotations.NotNull;
 
 import static com.github.masongulu.ComputerMod.MOD_ID;
 import static com.github.masongulu.gui.ToggleSwitchType.PIANO;
 
-public class GenericDeviceScreen extends AbstractContainerScreen<GenericDeviceMenu> implements PianoButtonGroup.ModifiableScreen {
-    private final ResourceLocation texture = new ResourceLocation(MOD_ID, "textures/gui/generic_device.png");
-    private final GenericDeviceMenu deviceMenu;
+public class GenericDeviceScreen<T extends GenericDeviceMenu> extends AbstractContainerScreen<T> implements PianoButtonGroup.ModifiableScreen {
+    protected ResourceLocation texture = new ResourceLocation(MOD_ID, "textures/gui/generic_device.png");
+    private final T deviceMenu;
 //    private final ToggleSwitchButton[] deviceSelectors = new ToggleSwitchButton[16];
-    private PianoButtonGroup<Integer> deviceSelectors;
+    protected PianoButtonGroup<Integer> deviceSelectors;
 
-    public GenericDeviceScreen(GenericDeviceMenu abstractContainerMenu, Inventory inventory, Component component) {
+    public GenericDeviceScreen(T abstractContainerMenu, Inventory inventory, Component component) {
         super(abstractContainerMenu, inventory, component);
         deviceMenu = abstractContainerMenu;
         this.imageHeight = 107;
@@ -30,14 +33,20 @@ public class GenericDeviceScreen extends AbstractContainerScreen<GenericDeviceMe
 
     @Override
     protected void init() {
+        init(true);
+    }
+
+    protected void init(boolean buttons) {
         super.init();
         int k = this.leftPos;
         int l = this.topPos;
         assert minecraft != null;
-        deviceSelectors = PianoButtonGroup.deviceButtons(20, 26, k, l).setCallback(i -> {
-            assert minecraft.gameMode != null;
-            minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, i);
-        }).build(this, minecraft);
+        if (buttons) {
+            deviceSelectors = new DevicePianoButtons(20, 26, k, l, 1).setCallback(i -> {
+                assert minecraft.gameMode != null;
+                minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, i);
+            }).build(this, minecraft);
+        }
     }
 
     @Override
@@ -73,7 +82,7 @@ public class GenericDeviceScreen extends AbstractContainerScreen<GenericDeviceMe
     }
 
     @Override
-    public <T extends GuiEventListener & NarratableEntry> T addWidget(T guiEventListener) {
+    public <T2 extends GuiEventListener & NarratableEntry> @NotNull T2 addWidget(T2 guiEventListener) {
         return super.addWidget(guiEventListener);
     }
 }

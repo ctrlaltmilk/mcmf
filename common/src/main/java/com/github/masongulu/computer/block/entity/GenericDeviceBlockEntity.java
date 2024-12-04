@@ -40,7 +40,7 @@ public abstract class GenericDeviceBlockEntity extends BaseContainerBlockEntity 
     }
 
     protected UXNBus bus;
-    private final ContainerData data = new ContainerData() {
+    protected final ContainerData data = new ContainerData() {
         @Override
         public int get(int i) {
             return deviceNumber;

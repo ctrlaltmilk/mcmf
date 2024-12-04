@@ -15,6 +15,7 @@ public class ToggleSwitchButton extends Button {
     private ToggleSwitchType type;
     private String label;
     private Font font;
+    private boolean enabled;
     private LabelPosition labelPosition;
     public ToggleSwitchButton(int x, int y, String label, OnPress onPress, Font font, ToggleSwitchType type, LabelPosition position) {
         super(x - type.hw, y - type.hh, type.w, type.w, new TextComponent(label), onPress);
@@ -22,16 +23,31 @@ public class ToggleSwitchButton extends Button {
         this.label = label;
         this.font = font;
         this.labelPosition = position;
+        this.enabled = true;
     }
     public ToggleSwitchButton(int x, int y, String label, OnPress onPress, Font font, ToggleSwitchType type) {
         this(x, y, label, onPress, font, type, LabelPosition.ABOVE);
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void onPress() {
+        if (this.enabled) {
+            super.onPress();
+        }
     }
 
     public void renderBg(PoseStack poseStack, int i, int j, boolean state) {
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, texture);
 
-        int ty = state ? type.onTy : type.offTy;
+        int ty = enabled ? (state ? type.onTy : type.offTy) : type.disabledTY;
         this.blit(poseStack, x, y, type.tx, ty, type.w, type.h);
     }
 

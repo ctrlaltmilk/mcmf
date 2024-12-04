@@ -6,9 +6,7 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static com.github.masongulu.gui.ToggleSwitchType.PIANO;
 
@@ -19,16 +17,19 @@ public class PianoButtonGroup<T> implements Button.OnPress {
     private final int l;
     private int selected = 0;
     private PianoButtonCallback<T> callback;
-    private ArrayList<T> values;
-    private ArrayList<String> labels;
+    protected ArrayList<T> values;
+    protected ArrayList<String> labels;
+    protected ArrayList<Integer> disabledButtons;
     private int bWide = 4;
     private int bTall = 4;
     private int bWidth = PIANO.w + PIANO.padX;
     private int bHeight = PIANO.h + PIANO.padY;
     private boolean built = false;
+    protected int selectionWidth = 1;
+    private int maxSelection = 0;
 
-    private final ArrayList<PianoButtonEntry<T>> buttons = new ArrayList<>();
-    private final Map<Button,PianoButtonEntry<T>> buttonMap = new HashMap<>();
+    protected final ArrayList<PianoButtonEntry<T>> buttons = new ArrayList<>();
+    protected final Map<Button,PianoButtonEntry<T>> buttonMap = new HashMap<>();
 
     public PianoButtonGroup(int x, int y, int k, int l) {
         this.x = x;
@@ -62,10 +63,23 @@ public class PianoButtonGroup<T> implements Button.OnPress {
         return this;
     }
 
+    public PianoButtonGroup<T> setSelectionWidth(int width) {
+        this.selectionWidth = width;
+        maxSelection = bWide * bTall - (selectionWidth + 1);
+        return this;
+    }
+
     public PianoButtonGroup<T> setDims(int buttonsWide, int buttonsTall) {
         checkBuilt();
         this.bWide = buttonsWide;
         this.bTall = buttonsTall;
+        maxSelection = bWide * bTall - (selectionWidth + 1);
+        return this;
+    }
+
+    public PianoButtonGroup<T> setDisabled(ArrayList<Integer> disabled) {
+        checkBuilt();
+        disabledButtons = disabled;
         return this;
     }
 
@@ -99,20 +113,15 @@ public class PianoButtonGroup<T> implements Button.OnPress {
             int ay = l + y + bHeight * iy;
             ToggleSwitchButton b = new ToggleSwitchButton(ax, ay, labels.get(i), this,
                     minecraft.font, PIANO, ToggleSwitchButton.LabelPosition.ON);
+            if (disabledButtons.contains(i)) {
+                b.setEnabled(false);
+            }
             PianoButtonEntry<T> entry = new PianoButtonEntry<T>(b, values.get(i));
             buttons.add(entry);
             buttonMap.put(b, entry);
             s.addWidget(b);
         }
         return this;
-    }
-
-    public static PianoButtonGroup<Integer> deviceButtons(int x, int y, int k, int l) {
-        ArrayList<Integer> values = new ArrayList<>();
-        for (int i = 0; i < 16; i++) {
-            values.add(i);
-        }
-        return new PianoButtonGroup<Integer>(x,y,k,l).setValues(values);
     }
 
     @Override
@@ -125,17 +134,19 @@ public class PianoButtonGroup<T> implements Button.OnPress {
 
     public void renderBg(PoseStack poseStack, int i, int j) {
         for (int d = 0; d < bWide * bTall; d++) {
-            buttons.get(d).button.renderBg(poseStack, i, j, selected == d);
+            boolean active = d >= selected && d < selected + selectionWidth;
+            buttons.get(d).button.renderBg(poseStack, i, j, active);
         }
     }
 
     public void render(PoseStack poseStack, int i, int j, float f) {
         for (int d = 0; d < bWide * bTall; d++) {
-            buttons.get(d).button.render(poseStack, i, j, f, selected == d);
+            boolean active = d >= selected && d < selected + selectionWidth;
+            buttons.get(d).button.render(poseStack, i, j, f, active);
         }
     }
 
-    static class PianoButtonEntry<T> {
+    protected static class PianoButtonEntry<T> {
         ToggleSwitchButton button;
         T value;
         public PianoButtonEntry(ToggleSwitchButton button, T v) {

@@ -20,7 +20,11 @@ public class GenericDeviceMenu extends AbstractContainerMenu {
     }
 
     public GenericDeviceMenu(int i, Inventory inventory, GenericDeviceBlockEntity bentity, ContainerData data, Container container) {
-        super(ModMenus.GENERIC_DEVICE_MENU.get(), i);
+        this(i, inventory, bentity, data, container, ModMenus.GENERIC_DEVICE_MENU.get());
+    }
+
+    protected GenericDeviceMenu(int i, Inventory inventory, GenericDeviceBlockEntity bentity, ContainerData data, Container container, MenuType<?> menuType){
+        super(menuType, i);
         blockEntity = bentity;
         this.data = data;
         addDataSlots(this.data);
