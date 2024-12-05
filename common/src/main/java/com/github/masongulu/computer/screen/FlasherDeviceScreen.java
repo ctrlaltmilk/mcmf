@@ -45,7 +45,7 @@ public class FlasherDeviceScreen extends GenericDeviceScreen<FlasherDeviceMenu> 
         int k = this.leftPos;
         int l = this.topPos;
         assert minecraft != null;
-        deviceSelectors = new DevicePianoButtons(20, 26, k, l, 4).setCallback(i -> {
+        deviceSelectors = new DevicePianoButtons(20, 26, k, l, 1).setCallback(i -> {
             assert minecraft.gameMode != null;
             minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, i);
         }).build(this, minecraft);

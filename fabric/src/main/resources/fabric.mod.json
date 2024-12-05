@@ -3,9 +3,9 @@
   "id": "mcmf",
   "version": "${version}",
   "name": "Minecraft Mainframes",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "description": "This is a computer mod which adds programmable UXN computers to the game.",
   "authors": [
-    "Me!"
+    "ShreksHellraiser"
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",

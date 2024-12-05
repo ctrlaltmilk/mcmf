@@ -28,10 +28,12 @@ import static com.github.masongulu.ModBlockEntities.REDSTONE_DEVICE_BLOCK_ENTITY
 
 public class FlasherDeviceBlockEntity extends GenericDeviceBlockEntity {
     private NonNullList<ItemStack> items;
+    public static final int INVENTORY_SIZE = 1;
 
     public FlasherDeviceBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(FLASHER_DEVICE_BLOCK_ENTITY.get(), blockPos, blockState);
         deviceNumber = 13;
+        this.items = NonNullList.withSize(INVENTORY_SIZE, ItemStack.EMPTY);
     }
 
     private void tick(Level level, BlockPos pos, BlockState state) {
@@ -77,7 +79,7 @@ public class FlasherDeviceBlockEntity extends GenericDeviceBlockEntity {
 
     @Override
     public int getContainerSize() {
-        return 1;
+        return INVENTORY_SIZE;
     }
 
     @Override
@@ -134,7 +136,7 @@ public class FlasherDeviceBlockEntity extends GenericDeviceBlockEntity {
 
     public void load(CompoundTag compoundTag) {
         super.load(compoundTag);
-        this.items = NonNullList.withSize(1, ItemStack.EMPTY);
+        this.items = NonNullList.withSize(INVENTORY_SIZE, ItemStack.EMPTY);
         ContainerHelper.loadAllItems(compoundTag, this.items);
     }
 
