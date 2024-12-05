@@ -44,6 +44,30 @@ public abstract class MemoryItem extends Item {
         return uuid;
     }
 
+    public @Nullable String getLabel(ItemStack pStack) {
+        if (pStack.hasTag() && pStack.getTag().contains(LABEL_TAG)) {
+            return pStack.getTag().getString(LABEL_TAG);
+        }
+        return null;
+    }
+
+    public void setLabel(ItemStack stack, String label) {
+        if (stack.hasTag()) {
+            CompoundTag tag = stack.getTag();
+            assert tag != null;
+            tag.putString(LABEL_TAG, label);
+            stack.setTag(tag);
+        } else {
+            CompoundTag tag = new CompoundTag();
+            tag.putString(LABEL_TAG, label);
+            stack.setTag(tag);
+        }
+    }
+
+    public abstract boolean isFlashable();
+
+    public abstract String getLabelForDirectory();
+
     public abstract MemoryRegion getMemory(ItemStack stack);
 
     @Override

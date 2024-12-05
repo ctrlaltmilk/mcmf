@@ -1,6 +1,7 @@
 package com.github.masongulu;
 
 import com.github.masongulu.item.ModItems;
+import com.github.masongulu.network.ModPackets;
 import com.github.masongulu.serial.ISerialPeer;
 import com.github.masongulu.serial.block.entity.SerialPeerBlockEntity;
 import com.github.masongulu.core.uxn.UXNBus;
@@ -9,6 +10,8 @@ import com.github.masongulu.core.uxn.devices.Console;
 import dev.architectury.event.EventResult;
 import dev.architectury.event.events.common.BlockEvent;
 import dev.architectury.event.events.common.TickEvent;
+import dev.architectury.platform.Platform;
+import net.fabricmc.api.EnvType;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -75,6 +78,7 @@ public final class ComputerMod {
         ModBlockEntities.register();
         Commands.register();
         ModMenus.register();
+        ModPackets.register();
         registerEvents();
     }
 }

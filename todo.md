@@ -5,6 +5,9 @@
   * Put these slots in the UI
 * Remove computers from execution when unloaded
 * UXN serial /type support
+* Serial terminal pasting
+* Add event queue limit
+* Replace hardcoded strings with translatable ones!
 
 # Less Important
 * Argument parsing (from serial i/o events)
@@ -12,7 +15,6 @@
 * Serial device sided-ness
 * Serial Terminal
   * Escape code support (in progress)
-  * Save state to NBT data
 
 # Ideas
 * Work "Magic Smoke Demon: a mob that is spawned whenever a computer block is blown up or destroy by unconventional means. This mob drops captured magic smoke: an item used to craft capacitors which can be thrown and explode on impact.
@@ -22,7 +24,8 @@
     * magic smoke monster drops magic smoke
       * reloads blown capacitors
       * maybe used for higher tiers of computers????
-* [UXF font](https://wiki.xxiivv.com/site/ufx_format.html) support 
+* [UXF font](https://wiki.xxiivv.com/site/ufx_format.html) support
+* Serial Terminal NBT data
   
 # MVP Requirements
 * Fully functional device # selection

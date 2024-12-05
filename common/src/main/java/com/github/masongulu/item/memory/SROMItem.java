@@ -13,4 +13,14 @@ public class SROMItem extends MemoryItem {
         }
         return region;
     }
+
+    @Override
+    public String getLabelForDirectory() {
+        return "srom";
+    }
+
+    @Override
+    public boolean isFlashable() {
+        return true;
+    }
 }
