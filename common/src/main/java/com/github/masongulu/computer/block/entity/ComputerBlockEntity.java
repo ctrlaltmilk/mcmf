@@ -83,7 +83,6 @@ public class ComputerBlockEntity extends BaseContainerBlockEntity implements Men
 
     public void startup() {
         if (bus.uxn == null) {
-            System.out.println("Starting up...");
             // this will register the bus on this computer
             bus.startup();
         }
@@ -91,7 +90,6 @@ public class ComputerBlockEntity extends BaseContainerBlockEntity implements Men
 
     public void shutdown() {
         if (bus.isExecuting()) {
-            System.out.println("Shutting down...");
             bus.shutdown();
         }
     }

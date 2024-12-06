@@ -5,6 +5,8 @@ import com.github.masongulu.computer.block.entity.ComputerBlockEntity;
 import com.github.masongulu.item.memory.MemoryItem;
 import com.github.masongulu.core.uxn.devices.IDevice;
 import com.github.masongulu.core.uxn.devices.IDeviceProvider;
+import com.github.masongulu.serial.ISerialPeer;
+import com.github.masongulu.serial.block.entity.SerialDeviceBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
@@ -17,6 +19,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static com.github.masongulu.ModBlocks.DEVICE_CABLE;
+import static com.github.masongulu.serial.block.entity.SerialTerminalBlockEntity.ARGUMENT_MODE_SEQUENCE;
 
 public class UXNBus {
     public UXN uxn;
@@ -25,6 +28,7 @@ public class UXNBus {
     private boolean executing = false;
     private boolean conflicting = false;
     private boolean paused = false;
+    private boolean argumentMode = true;
 
     private final ComputerBlockEntity computerEntity;
     private final byte[] deviceMemory = new byte[256];
@@ -144,6 +148,19 @@ public class UXNBus {
             uxn.paused = paused;
             uxn.queueEvent(new BootEvent());
             ComputerMod.UXN_EXECUTOR.addUXN(uxn);
+            if (argumentMode) {
+                for (IDevice device : devices) {
+                    if (device instanceof SerialDeviceBlockEntity sDevice && sDevice.getPeer() != null) {
+                        // Spaghetti yay
+                        ISerialPeer peer = sDevice.getPeer();
+                        for (char ch : ARGUMENT_MODE_SEQUENCE.toCharArray()) {
+                            peer.write(ch);
+                        }
+                        break;
+                    }
+                }
+            }
+            argumentMode = false;
         }
     }
 

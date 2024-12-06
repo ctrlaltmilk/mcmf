@@ -5,6 +5,7 @@ import com.github.masongulu.serial.ISerialPeer;
 import com.github.masongulu.core.uxn.UXNBus;
 import com.github.masongulu.core.uxn.UXNEvent;
 import com.github.masongulu.core.uxn.devices.IDevice;
+import com.github.masongulu.serial.SerialType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -50,7 +51,6 @@ public class SerialDeviceBlockEntity extends GenericDeviceBlockEntity implements
 
     @Override
     public void read(int address) {
-
     }
 
     @Override
@@ -83,8 +83,13 @@ public class SerialDeviceBlockEntity extends GenericDeviceBlockEntity implements
 
     @Override
     public void write(char ch) {
+        write(ch, SerialType.STDIN);
+    }
+
+    @Override
+    public void write(char ch, SerialType type) {
         if (bus != null) {
-            bus.queueEvent(new KeyEvent(ch, (byte) 0x01, (byte) (deviceNumber << 4)));
+            bus.queueEvent(new KeyEvent(ch, (byte) type.value, (byte) (deviceNumber << 4)));
         }
     }
 
