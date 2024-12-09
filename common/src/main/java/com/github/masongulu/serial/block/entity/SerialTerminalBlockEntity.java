@@ -183,7 +183,7 @@ public class SerialTerminalBlockEntity extends SerialPeerBlockEntity implements 
             lineBuffer = new StringBuilder();
         } else if (i == 127) { // backspace??
             if (!lineBuffer.isEmpty()) lineBuffer.deleteCharAt(lineBuffer.length() - 1);
-            buffer.write('*'); // backspace indication
+            if (argumentMode) buffer.write('*'); // backspace indication
         } else {
             lineBuffer.append(i);
         }
