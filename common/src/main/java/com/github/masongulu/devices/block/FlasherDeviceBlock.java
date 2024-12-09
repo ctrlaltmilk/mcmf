@@ -1,17 +1,13 @@
-package com.github.masongulu.computer.block;
+package com.github.masongulu.devices.block;
 
 import com.github.masongulu.ModBlockEntities;
-import com.github.masongulu.computer.block.entity.FlasherDeviceBlockEntity;
-import com.github.masongulu.computer.block.entity.RedstoneDeviceBlockEntity;
+import com.github.masongulu.devices.block.entities.FlasherDeviceBlockEntity;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -20,9 +16,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class FlasherDeviceBlock extends GenericDeviceBlock {
 

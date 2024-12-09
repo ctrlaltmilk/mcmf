@@ -1,4 +1,4 @@
-package com.github.masongulu.computer.block;
+package com.github.masongulu.devices.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

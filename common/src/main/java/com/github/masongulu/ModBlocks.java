@@ -2,8 +2,8 @@ package com.github.masongulu;
 
 import com.github.masongulu.computer.block.CableBlock;
 import com.github.masongulu.computer.block.ComputerBlock;
-import com.github.masongulu.computer.block.FlasherDeviceBlock;
-import com.github.masongulu.computer.block.RedstoneDeviceBlock;
+import com.github.masongulu.devices.block.FlasherDeviceBlock;
+import com.github.masongulu.devices.block.RedstoneDeviceBlock;
 import com.github.masongulu.serial.block.SerialCableBlock;
 import com.github.masongulu.serial.block.SerialDeviceBlock;
 import com.github.masongulu.serial.block.SerialTerminalBlock;

@@ -1,9 +1,6 @@
-package com.github.masongulu.computer.block.entity;
+package com.github.masongulu.devices.block.entities;
 
-import com.github.masongulu.computer.screen.FlasherDeviceMenu;
-import com.github.masongulu.computer.screen.GenericDeviceMenu;
-import com.github.masongulu.core.uxn.UXNBus;
-import com.github.masongulu.core.uxn.UXNEvent;
+import com.github.masongulu.devices.screen.FlasherDeviceMenu;
 import com.github.masongulu.core.uxn.devices.IDevice;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -20,11 +17,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static com.github.masongulu.ModBlockEntities.FLASHER_DEVICE_BLOCK_ENTITY;
-import static com.github.masongulu.ModBlockEntities.REDSTONE_DEVICE_BLOCK_ENTITY;
 
 public class FlasherDeviceBlockEntity extends GenericDeviceBlockEntity {
     private NonNullList<ItemStack> items;

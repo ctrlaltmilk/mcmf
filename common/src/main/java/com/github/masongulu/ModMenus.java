@@ -1,6 +1,10 @@
 package com.github.masongulu;
 
 import com.github.masongulu.computer.screen.*;
+import com.github.masongulu.devices.screen.FlasherDeviceMenu;
+import com.github.masongulu.devices.screen.FlasherDeviceScreen;
+import com.github.masongulu.devices.screen.GenericDeviceMenu;
+import com.github.masongulu.devices.screen.GenericDeviceScreen;
 import com.github.masongulu.serial.screen.SerialTerminalMenu;
 import com.github.masongulu.serial.screen.SerialTerminalScreen;
 import dev.architectury.platform.Platform;

@@ -1,7 +1,7 @@
-package com.github.masongulu.computer.block;
+package com.github.masongulu.devices.block;
 
 import com.github.masongulu.ModBlockEntities;
-import com.github.masongulu.computer.block.entity.RedstoneDeviceBlockEntity;
+import com.github.masongulu.devices.block.entities.RedstoneDeviceBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;

@@ -1,13 +1,11 @@
-package com.github.masongulu.computer.block.entity;
+package com.github.masongulu.devices.block.entities;
 
-import com.github.masongulu.computer.screen.GenericDeviceMenu;
+import com.github.masongulu.devices.screen.GenericDeviceMenu;
 import com.github.masongulu.core.uxn.UXNBus;
 import com.github.masongulu.core.uxn.devices.IDevice;
 import com.github.masongulu.core.uxn.devices.IDeviceProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -17,9 +15,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.UUID;
 
 public abstract class GenericDeviceBlockEntity extends BaseContainerBlockEntity implements MenuProvider, IDeviceProvider, IDevice {
     public int deviceNumber;

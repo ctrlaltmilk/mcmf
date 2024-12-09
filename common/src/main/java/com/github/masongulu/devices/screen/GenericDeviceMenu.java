@@ -1,8 +1,7 @@
-package com.github.masongulu.computer.screen;
+package com.github.masongulu.devices.screen;
 
 import com.github.masongulu.ModMenus;
-import com.github.masongulu.computer.block.entity.ComputerBlockEntity;
-import com.github.masongulu.computer.block.entity.GenericDeviceBlockEntity;
+import com.github.masongulu.devices.block.entities.GenericDeviceBlockEntity;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;

@@ -1,8 +1,7 @@
-package com.github.masongulu.computer.screen;
+package com.github.masongulu.devices.screen;
 
 import com.github.masongulu.gui.DevicePianoButtons;
 import com.github.masongulu.gui.PianoButtonGroup;
-import com.github.masongulu.gui.ToggleSwitchButton;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.components.events.GuiEventListener;
@@ -11,12 +10,10 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.animal.Panda;
 import net.minecraft.world.entity.player.Inventory;
 import org.jetbrains.annotations.NotNull;
 
 import static com.github.masongulu.ComputerMod.MOD_ID;
-import static com.github.masongulu.gui.ToggleSwitchType.PIANO;
 
 public class GenericDeviceScreen<T extends GenericDeviceMenu> extends AbstractContainerScreen<T> implements PianoButtonGroup.ModifiableScreen {
     protected ResourceLocation texture = new ResourceLocation(MOD_ID, "textures/gui/generic_device.png");

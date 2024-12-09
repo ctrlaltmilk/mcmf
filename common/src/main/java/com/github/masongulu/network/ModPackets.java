@@ -1,22 +1,15 @@
 package com.github.masongulu.network;
 
-import com.github.masongulu.ModMenus;
-import com.github.masongulu.computer.block.entity.FlasherDeviceBlockEntity;
-import com.github.masongulu.computer.screen.FlasherDeviceMenu;
+import com.github.masongulu.devices.screen.FlasherDeviceMenu;
 import com.github.masongulu.item.memory.FileManager;
 import com.github.masongulu.item.memory.MemoryItem;
 import dev.architectury.networking.NetworkManager;
-import dev.architectury.platform.Platform;
-import net.fabricmc.api.EnvType;
-import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BlockEntity;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 
 import static com.github.masongulu.ComputerMod.MOD_ID;
 

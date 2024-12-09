@@ -1,6 +1,7 @@
-package com.github.masongulu.computer.screen;
+package com.github.masongulu.devices.screen;
 
-import com.github.masongulu.computer.block.entity.FlasherDeviceBlockEntity;
+import com.github.masongulu.computer.screen.FlashableMemorySlot;
+import com.github.masongulu.devices.block.entities.FlasherDeviceBlockEntity;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;

@@ -1,6 +1,6 @@
 package com.github.masongulu.serial.block.entity;
 
-import com.github.masongulu.computer.block.entity.GenericDeviceBlockEntity;
+import com.github.masongulu.devices.block.entities.GenericDeviceBlockEntity;
 import com.github.masongulu.serial.ISerialPeer;
 import com.github.masongulu.core.uxn.UXNBus;
 import com.github.masongulu.core.uxn.UXNEvent;

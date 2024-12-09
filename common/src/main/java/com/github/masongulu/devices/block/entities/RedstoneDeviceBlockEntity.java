@@ -1,4 +1,4 @@
-package com.github.masongulu.computer.block.entity;
+package com.github.masongulu.devices.block.entities;
 
 import com.github.masongulu.core.uxn.UXNBus;
 import com.github.masongulu.core.uxn.UXNEvent;

@@ -1,8 +1,8 @@
 package com.github.masongulu;
 
 import com.github.masongulu.computer.block.entity.ComputerBlockEntity;
-import com.github.masongulu.computer.block.entity.FlasherDeviceBlockEntity;
-import com.github.masongulu.computer.block.entity.RedstoneDeviceBlockEntity;
+import com.github.masongulu.devices.block.entities.FlasherDeviceBlockEntity;
+import com.github.masongulu.devices.block.entities.RedstoneDeviceBlockEntity;
 import com.github.masongulu.serial.block.entity.SerialDeviceBlockEntity;
 import com.github.masongulu.serial.block.entity.SerialTerminalBlockEntity;
 import dev.architectury.registry.registries.DeferredRegister;
