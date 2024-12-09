@@ -92,6 +92,8 @@ public class ComputerMenu extends AbstractContainerMenu {
         } else if (i == 2) {
             // step
             blockEntity.step();
+        } else if (i == 3) {
+            blockEntity.toggleArgumentMode();
         }
         return true;
     }
@@ -110,4 +112,7 @@ public class ComputerMenu extends AbstractContainerMenu {
         }
     }
 
+    public boolean isArgumentMode() {
+        return data.get(ComputerBlockEntity.DATA_START + 4) == 1;
+    }
 }

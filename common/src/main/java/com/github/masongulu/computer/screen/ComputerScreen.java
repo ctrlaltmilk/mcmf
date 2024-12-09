@@ -17,11 +17,13 @@ public class ComputerScreen extends AbstractContainerScreen<ComputerMenu> {
     public ToggleSwitchButton powerButton;
     public ToggleSwitchButton pauseButton;
     public ToggleSwitchButton stepButton;
+    public ToggleSwitchButton argumentButton;
     private final ResourceLocation texture = new ResourceLocation(MOD_ID, "textures/gui/computer.png");
     private final ComputerMenu computerMenu;
     private final int powerSwitchX = 25;
     private final int pauseSwitchX = 60;
     private final int stepButtonX = 90;
+    private final int argumentButtonX = 120;
     private final int switchY = 102;
     private final TerminalFont segFont = TerminalFont.SEG7;
 
@@ -53,10 +55,16 @@ public class ComputerScreen extends AbstractContainerScreen<ComputerMenu> {
             assert minecraft.gameMode != null;
             minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 2);
         }, minecraft.font, ToggleSwitchType.TOGGLE);
+        argumentButton = new ToggleSwitchButton(k + argumentButtonX, l + switchY, "Arg", button -> {
+            assert minecraft != null;
+            assert minecraft.gameMode != null;
+            minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 3);
+        }, minecraft.font, ToggleSwitchType.TOGGLE);
 
         addWidget(powerButton);
         addWidget(pauseButton);
         addWidget(stepButton);
+        addWidget(argumentButton);
     }
 
     @Override
@@ -71,6 +79,7 @@ public class ComputerScreen extends AbstractContainerScreen<ComputerMenu> {
         powerButton.renderBg(poseStack, k, l, computerMenu.isRunning());
         pauseButton.renderBg(poseStack, k, l, computerMenu.isPaused());
         stepButton.renderBg(poseStack, k, l, false);
+        argumentButton.renderBg(poseStack, k, l, computerMenu.isArgumentMode());
 
 //        RenderSystem.setShaderTexture(0, segFont.texture);
 //        String wst = computerMenu.getWst();
@@ -94,6 +103,7 @@ public class ComputerScreen extends AbstractContainerScreen<ComputerMenu> {
         powerButton.render(poseStack, i, j, f);
         pauseButton.render(poseStack, i, j, f);
         stepButton.render(poseStack, i, j, f);
+        argumentButton.render(poseStack, i, j, f);
         drawString(poseStack, minecraft.font, computerMenu.getWst(), x + 8, y + 43, 16777215);
         drawString(poseStack, minecraft.font, computerMenu.getRst(), x + 8, y + 61, 16777215);
 //        drawString(poseStack, minecraft.font, "WST", x + 8, y + 44, 16777215);

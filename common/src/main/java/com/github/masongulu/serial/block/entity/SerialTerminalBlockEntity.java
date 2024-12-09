@@ -131,8 +131,8 @@ public class SerialTerminalBlockEntity extends SerialPeerBlockEntity implements 
         WHITESPACE_SKIPPING
     }
     private void setParseState(ArgumentParseState state) {
-        if (state == ArgumentParseState.WHITESPACE_SKIPPING) {
-            peer.write(' ', SerialType.ARGUMENT_SPACER);
+        if (parseState == ArgumentParseState.WHITESPACE_SKIPPING && state != parseState) {
+            peer.write('\0', SerialType.ARGUMENT_SPACER);
         }
         parseState = state;
     }

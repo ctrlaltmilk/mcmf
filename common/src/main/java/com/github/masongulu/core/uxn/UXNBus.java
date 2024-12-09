@@ -28,7 +28,7 @@ public class UXNBus {
     private boolean executing = false;
     private boolean conflicting = false;
     private boolean paused = false;
-    private boolean argumentMode = true;
+    private boolean argumentMode = false;
 
     private final ComputerBlockEntity computerEntity;
     private final byte[] deviceMemory = new byte[256];
@@ -233,6 +233,14 @@ public class UXNBus {
 
     public boolean isExecuting() {
         return executing;
+    }
+
+    public boolean isArgumentMode() {
+        return argumentMode;
+    }
+
+    public void setArgumentMode(boolean state) {
+        argumentMode = state;
     }
 
     public boolean isPaused() {

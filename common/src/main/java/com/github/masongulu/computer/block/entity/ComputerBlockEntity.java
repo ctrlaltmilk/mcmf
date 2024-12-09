@@ -26,7 +26,7 @@ import static com.github.masongulu.ModBlockEntities.COMPUTER_BLOCK_ENTITY;
 public class ComputerBlockEntity extends BaseContainerBlockEntity implements MenuProvider {
     public static final int STRING_LENGTH = "WST 00 00 00 00 00 00 00 00 <".length(); // 29 characters
     public static final int DATA_START = STRING_LENGTH * 2;
-    public static final int DATA_LENGTH = DATA_START + 4;
+    public static final int DATA_LENGTH = DATA_START + 5;
     private final UXNBus bus;
     private final ContainerData data = new ContainerData() {
         private String rst = "RST 00 00 00 00 00 00 00 00|<";
@@ -54,6 +54,8 @@ public class ComputerBlockEntity extends BaseContainerBlockEntity implements Men
                 return (bus.isPaused()) ? 1 : 0;
             } else if (i == DATA_START + 3) {
                 return bus.getEventCount();
+            } else if (i == DATA_START + 4) {
+                return bus.isArgumentMode() ? 1 : 0;
             }
             return 0;
         }
@@ -211,5 +213,9 @@ public class ComputerBlockEntity extends BaseContainerBlockEntity implements Men
     protected void saveAdditional(CompoundTag compoundTag) {
         super.saveAdditional(compoundTag);
         ContainerHelper.saveAllItems(compoundTag, this.items);
+    }
+
+    public void toggleArgumentMode() {
+        bus.setArgumentMode(!bus.isArgumentMode());
     }
 }
